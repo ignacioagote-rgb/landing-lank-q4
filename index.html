@@ -626,6 +626,16 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .plx{display:none;position:relative;background:#1C1C4F;color:#fff;font-family:var(--f-brand);height:calc(var(--vph,720px) * 2.2)}
 .pl-wrap:is([data-pl="B"],[data-pl="C"]) #plataformas{display:none}
 .pl-wrap:is([data-pl="B"],[data-pl="C"]) .plx{display:block}
+/* Opción B: violeta de marca (el mismo del hero) e íconos en blanco; sin bajada */
+.pl-wrap[data-pl="B"] .plx{background:#4242B2}
+.pl-wrap[data-pl="B"] .plx-stage::before{background:radial-gradient(closest-side,rgba(255,255,255,.22),rgba(255,255,255,.06) 55%,transparent)}
+.pl-wrap[data-pl="B"] .plx-c button{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.22)}
+.pl-wrap[data-pl="B"] .plx-c .ic{background:#fff}
+.pl-wrap[data-pl="B"] .plx-c .ic svg{stroke:#4242B2}
+.pl-wrap[data-pl="B"] .plx-c small{color:rgba(255,255,255,.75)}
+.plx-tail p{display:none}
+.plx-tail .plx-btn{margin-top:28px}
+.mobile .plx-tail .plx-btn{margin-top:20px}
 /* Opción C: igual que B, con fondo naranja secundario */
 .pl-wrap[data-pl="C"] .plx{background:#FF7555}
 .pl-wrap[data-pl="C"] .plx-stage::before{background:radial-gradient(closest-side,rgba(255,255,255,.28),rgba(255,255,255,.08) 55%,transparent)}
@@ -655,7 +665,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .plx-c b{display:block;font-size:16px;font-weight:700;line-height:1.2}
 .plx-c small{display:block;margin-top:2px;font-size:12px;color:rgba(255,255,255,.6);max-width:180px;overflow:hidden;text-overflow:ellipsis}
 @keyframes plxf{from{transform:translate(0,-7px) rotate(-.6deg)}to{transform:translate(4px,7px) rotate(.6deg)}}
-.mobile .plx{height:calc(var(--vph,716px) * 3.2)}
+.mobile .plx{height:calc(var(--vph,716px) * 2)}
+.mobile .plx-cards.tw .plx-c{transition:opacity .5s ease,transform .5s ease}
 .mobile .plx-stage{padding-top:64px}
 .mobile .plx-cards{inset:64px 0 0 0}
 .mobile .plx-copy{padding:0 20px}
@@ -696,11 +707,9 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .mobile .hm .spb-l,.mobile .hm .spb-t{font-size:14px!important}
 
 
-/* Cómo funciona con scroll: la sección queda fija y el scroll avanza los 3 pasos del rol elegido */
+/* Cómo funciona: la sección queda fija un momento al scrollear; los pasos avanzan solos */
 .b2-track{position:relative}
 .b2-track.pin > .b2{position:sticky}
-.b2-track.pin .b2-nr circle{animation:none!important}
-.b2-track.pin .b2-steps li.active .b2-nr circle{stroke-dashoffset:var(--rp,100)}
 
 /* Resto de bloques con scroll: quedan fijos y el scroll maneja su animación; al terminar, sigue la página */
 .pn-track{position:relative}
@@ -754,6 +763,16 @@ html.phone .stage{padding:0!important;margin:0!important;max-width:none!importan
 html.phone .device.mobile{width:100%;max-width:none;margin:0;padding:0;border-radius:0;background:#fff}
 html.phone .device.mobile .statusbar,html.phone .device.mobile .safari{display:none!important}
 html.phone .device.mobile .viewport{border-radius:0}
+
+/* Hero + métricas: hero más compacto para que desde el inicio asome la primera métrica */
+.hero-track .h2x{padding-top:40px!important}
+.hero-track .h2x-sub{margin-top:16px!important;margin-bottom:24px!important}
+.desktop .hero-track .h2x h1{font-size:50px}
+.desktop .hero-track .hc-av{width:72px;height:72px}
+.hero-track .h2x[data-av="card2"] .hc{margin-top:32px!important;margin-bottom:28px!important}
+.hero-track.pin .hm{padding:20px 0 28px!important;justify-content:flex-start!important}
+.mobile .hero-track .h2x{padding-top:28px!important}
+.mobile .hero-track .h2x[data-av="card2"] .hc{margin-top:24px!important;margin-bottom:20px!important}
 
 /* Hero opción C: sin recuadro ni encabezado de grupo */
 .h2x[data-av="card2"] .hc{border:0;padding:0;border-radius:0;background:none}
@@ -1570,7 +1589,7 @@ html.phone .device.mobile .viewport{border-radius:0}
   var stage=sec.querySelector('.plx-stage'),copy=sec.querySelector('.plx-copy'),tail=sec.querySelector('.plx-tail'),box=document.getElementById('plx-cards');
   var src=[].slice.call(document.querySelectorAll('#cats .rcard')).filter(function(c){return !c.getAttribute('aria-hidden')});
   /* centro de cada card (% del escenario bajo el header) y profundidad de parallax.
-     Mobile: 4 lugares fijos; las cards rotan y nunca hay más de 4 a la vez (la 5.ª reemplaza a la 1.ª, etc.) */
+     Mobile: 4 lugares fijos; las primeras 4 entran con el scroll y después rotan solas (nunca más de 4 a la vez) */
   var POS=[[15,16,.9],[41,9,.5],[76,14,.8],[85,42,.6],[83,76,1],[60,90,.7],[30,88,.9],[12,62,.6],[13,39,.4]];
   var MPOS=[[34,6],[66,20],[34,80],[66,94]];
   box.innerHTML=src.map(function(c,i){var ic=c.querySelector('.ic').innerHTML,nm=c.querySelector('b').textContent,pl=(c.querySelector('.pl')||{}).textContent||'';
@@ -1580,8 +1599,14 @@ html.phone .device.mobile .viewport{border-radius:0}
   function mobQ(){return document.getElementById('device').classList.contains('mobile')}
   function cl(v){return v<0?0:v>1?1:v}
   function ease(v){return 1-Math.pow(1-v,3)}
+  var slots=[0,1,2,3],ptr=4,rotOn=false,rotT=null,rs=0;
+  function setSlot(c,j){c.style.setProperty('--x',MPOS[j][0]+'%');c._y=MPOS[j][1];}
+  function startRot(){if(rotOn)return;rotOn=true;box.classList.add('tw');rotT=setInterval(function(){
+    if(!sec.offsetParent)return;var j=rs%4;rs++;var nx=ptr;for(var g=0;g<cards.length&&slots.indexOf(nx)>=0;g++)nx=(nx+1)%cards.length;
+    ptr=(nx+1)%cards.length;setSlot(cards[nx],j);slots[j]=nx;upd();},1600);}
+  function stopRot(){if(!rotOn)return;rotOn=false;clearInterval(rotT);box.classList.remove('tw');slots=[0,1,2,3];ptr=4;rs=0;place();}
   function place(){var mob=document.getElementById('device').classList.contains('mobile');
-    cards.forEach(function(c,i){var p=mob?MPOS[i%4]:POS[i];if(!p)return;c.style.setProperty('--x',p[0]+'%');c._y=p[1];c._d=POS[i][2];});}
+    cards.forEach(function(c,i){var j=slots.indexOf(i),p=mob?MPOS[j>=0?j:i%4]:POS[i];if(!p)return;c.style.setProperty('--x',p[0]+'%');c._y=p[1];c._d=POS[i][2];});}
   function upd(){
     if(wrap.dataset.pl!=='B'&&wrap.dataset.pl!=='C')return;
     var vh=vp.clientHeight,lead=vh*.6,run=sec.offsetHeight-vh+lead,y=vp.scrollTop-sec.offsetTop+lead;
@@ -1593,12 +1618,18 @@ html.phone .device.mobile .viewport{border-radius:0}
     var vis=cards.filter(function(c){return c.offsetParent!==null}),H=box.clientHeight;
     vis.forEach(function(c){var h=c.offsetHeight,m=h/2+(mobQ()?4:14);c.style.setProperty('--y',Math.max(m,Math.min(H-m,c._y/100*H))+'px');});
     var mob=mobQ(),n=vis.length,d=.6/Math.max(1,n),S0=.12;
-    vis.forEach(function(c,k){var s=S0+k*d,cp=ease(cl((p-s)/(mob?.06:.14)));
-      /* mobile: sale cuando entra la que ocupa su mismo lugar (k+4) */
-      var op=mob&&k+4<n?ease(cl((p-(S0+(k+4)*d)+.02)/.05)):0;
-      c.style.setProperty('--co',cp*(1-op));c.style.setProperty('--cs',(.86+.14*cp)-.08*op);
-      c.style.pointerEvents=cp*(1-op)>.5?'':'none';
-      c.style.setProperty('--py',((1-cp)*(mob?36:60)-op*30+(mob?0:(.8-p)*40*(c._d||.6)))+'px');});
+    if(mob){
+      /* mobile: las primeras 4 entran con el scroll; cuando están las 4, se reemplazan solas cada ~2,5 s (sin scrollear) */
+      var D=.34/4,END=S0+3*D+.08;
+      if(p>=END&&!reduce)startRot();else if(p<END)stopRot();
+      cards.forEach(function(c,i){var j=slots.indexOf(i),co=0,py=24;
+        if(j>=0){var cp=rotOn?1:ease(cl((p-(S0+j*D))/.06));co=cp;py=(1-cp)*36;}
+        c.style.setProperty('--co',co);c.style.setProperty('--cs',(.86+.14*co).toFixed(3));c.style.pointerEvents=co>.5?'':'none';c.style.setProperty('--py',py+'px');});
+    }else
+    vis.forEach(function(c,k){var s=S0+k*d,cp=ease(cl((p-s)/.14));
+      c.style.setProperty('--co',cp);c.style.setProperty('--cs',.86+.14*cp);
+      c.style.pointerEvents=cp>.5?'':'none';
+      c.style.setProperty('--py',((1-cp)*60+(.8-p)*40*(c._d||.6))+'px');});
     var sp=ease(cl((p-.08)/.12));tail.style.setProperty('--so',sp);tail.style.setProperty('--sy',(1-sp)*16+'px');
   }
   vp.addEventListener('scroll',upd,{passive:true});
@@ -1709,7 +1740,7 @@ html.phone .device.mobile .viewport{border-radius:0}
   var lw=document.createElement('div');lw.className='l-wrap';hm.appendChild(lw);var box=document.createElement('div');box.className='sp sp-b';lw.appendChild(box);
   [].slice.call(sp.querySelectorAll('.sp-b .spb-main,.sp-b .spb-row')).forEach(function(e){var c=e.cloneNode(true);c.classList.remove('sp-it');c.removeAttribute('style');box.appendChild(c);});
   duo.appendChild(hm);
-  var its=[].slice.call(box.children),EXTRA=1.1,final=false,T=0;
+  var its=[].slice.call(box.children),EXTRA=1.1,final=false,T=0,hhT=72;
   function on(){return sp.dataset.sp==='B'}
   var txt=[].slice.call(document.querySelectorAll('.h2x #h2x-title,.h2x .h2x-sub,.h2x .h2x-btn'));
   function finalState(){if(final)return;final=true;var hc=document.querySelector('.hc');if(!hc)return;
@@ -1724,16 +1755,18 @@ html.phone .device.mobile .viewport{border-radius:0}
     /* los avatares quedan justo debajo del header; si sobra alto, lo toma el bloque blanco (no queda violeta vacío arriba) */
     var hc=hsw.querySelector('.hc'),hr=hsw.getBoundingClientRect(),hcOff=hc?(hc.getBoundingClientRect().top-hr.top)/((hr.height/H)||1):0;
     var hd=document.querySelector('.l-header'),hh=hd?hd.offsetHeight:72;
-    T=Math.min(hh+20-hcOff,(vh-M)-H);duo.style.top=T+'px';hm.style.minHeight=(vh-(T+H))+'px';tr.style.height=(duo.offsetHeight+Math.round(vh*EXTRA))+'px';upd();
+    /* abajo: el bloque de métricas con su alto natural; arriba: lo que entre del hero (lo que quede bajo el header se desvanece) */
+    T=Math.min(hh,(vh-M)-H);duo.style.top=T+'px';hhT=hh;
+    txt.forEach(function(el){var er=el.getBoundingClientRect(),hr2=hsw.getBoundingClientRect(),kk=(hr2.height/H)||1;el._pt=T+(er.top-hr2.top)/kk;});tr.style.height=(duo.offsetHeight+Math.round(vh*EXTRA))+'px';upd();
   }
   function upd(){
     if(!on())return;
     var start=tr.offsetTop-T,run=tr.offsetHeight-duo.offsetHeight,y=vp.scrollTop-start;
     if(vp.scrollTop>8)finalState();
     /* el título, la bajada y el CTA se desvanecen antes de que el hero quede fijo: arriba solo queda el gráfico */
-    var fo=cl((start-vp.scrollTop)/140).toFixed(3);txt.forEach(function(el){el.style.opacity=fo;});
+    var fo=cl((start-vp.scrollTop)/Math.max(1,Math.min(140,start)));txt.forEach(function(el){el.style.opacity=(el._pt!==undefined&&el._pt>=hhT+8)?1:fo.toFixed(3);});
     var p=reduce?1:cl(y/Math.max(1,run));
-    its.forEach(function(e,i){var s=.04+i*.26,k=ease(cl((p-s)/.2));
+    its.forEach(function(e,i){var s=i===0?-1:.04+(i-1)*.3,k=ease(cl((p-s)/.2));
       e.style.setProperty('--io',k.toFixed(3));e.style.setProperty('--iy',((1-k)*24).toFixed(1)+'px');
       e.querySelectorAll('.cnt').forEach(function(c){var kc=ease(cl((p-s)/.3));c.textContent=(c.dataset.pre||'')+fmt(parseFloat(c.dataset.to)*kc,+c.dataset.dec)+(c.dataset.suf||'');});});
   }
@@ -1747,29 +1780,16 @@ html.phone .device.mobile .viewport{border-radius:0}
 </script>
 
 <script>
-/* Cómo funciona: queda fija mientras se scrollea y el scroll avanza los 3 pasos del rol elegido (el círculo del número
-   se completa con el scroll). Con el paso 3, sigue la página. Para ver el otro rol hay que tocar su solapa. */
+/* Cómo funciona: queda fija un momento al scrollear, pero los pasos avanzan solos con el tiempo, como antes
+   (el círculo del número se completa con el temporizador). Las solapas cambian de rol y vuelven al paso 1. */
 (function(){
-  var vp=document.getElementById('viewport'),sec=document.getElementById('how');if(!vp||!sec||!window.b2Set)return;
+  var vp=document.getElementById('viewport'),sec=document.getElementById('how');if(!vp||!sec)return;
   var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduce)return;
   var tr=document.createElement('div');tr.className='b2-track pin';sec.parentNode.insertBefore(tr,sec);tr.appendChild(sec);
-  window.b2Scroll=true;
-  var cur='dueno',N=3,PER=.34,T=0;
-  function cl(v){return v<0?0:v>1?1:v}
-  function off(el){var y=0;while(el&&el!==vp){y+=el.offsetTop;el=el.offsetParent;}return y;}
+  var EXTRA=.5;
   function setup(){var hd=document.querySelector('.l-header'),hh=hd?hd.offsetHeight:72,vh=vp.clientHeight,H=sec.offsetHeight;
-    T=Math.min(hh,vh-H);sec.style.top=T+'px';tr.style.height=(H+Math.round(vh*PER*N))+'px';upd();}
-  function range(){var start=off(tr)-T;return [start,tr.offsetHeight-sec.offsetHeight];}
-  function upd(){var a=range(),p=cl((vp.scrollTop-a[0])/Math.max(1,a[1]));
-    var f=Math.min(N-.0001,p*N),idx=Math.floor(f),loc=f-idx;
-    b2Set(cur,idx);
-    var act=sec.querySelector('.b2-steps li.active');if(act)act.style.setProperty('--rp',(100-loc*100).toFixed(1));
-    var cn=sec.querySelector('.b2-cnum');if(cn){cn.classList.remove('run');var c=cn.querySelector('.b2-nr circle');if(c){c.style.opacity=1;c.style.strokeDashoffset=(100-loc*100).toFixed(1);}}}
-  /* al cambiar de solapa vuelve al paso 1: lleva el scroll al inicio del tramo fijo (la sección no se mueve en pantalla) */
-  window.b2Jump=function(r){cur=r;var a=range();if(vp.scrollTop>a[0])vp.scrollTop=a[0]+1;upd();};
-  /* el nombre y el ícono de la categoría del grupo rotan solos mientras la sección está en pantalla */
-  setInterval(function(){if(!window.b2NextCat||!sec.offsetParent)return;var r=sec.getBoundingClientRect(),R=vp.getBoundingClientRect();if(r.bottom>R.top&&r.top<R.bottom)b2NextCat();},3200);
-  vp.addEventListener('scroll',upd,{passive:true});window.addEventListener('resize',setup);
+    sec.style.top=Math.min(hh,vh-H)+'px';tr.style.height=(H+Math.round(vh*EXTRA))+'px';}
+  window.addEventListener('resize',setup);
   document.addEventListener('click',function(e){if(e.target.closest('#b-mob,#b-desk,#restart'))setTimeout(setup,120);});
   setup();setTimeout(setup,500);if(document.fonts)document.fonts.ready.then(setup);
 })();
@@ -1784,7 +1804,7 @@ html.phone .device.mobile .viewport{border-radius:0}
   function cl(v){return v<0?0:v>1?1:v} function ease(v){return 1-Math.pow(1-v,3)}
   function off(el){var y=0;while(el&&el!==vp){y+=el.offsetTop;el=el.offsetParent;}return y;}
   var pins=[];
-  function pin(sec,extra,fn,head){if(!sec)return;var tr=document.createElement('div');tr.className='pn-track';sec.parentNode.insertBefore(tr,sec);tr.appendChild(sec);pins.push({sec:sec,tr:tr,extra:extra,fn:fn,T:0,head:!!head});}
+  function pin(sec,extra,fn,head,free){if(!sec)return;var tr=document.createElement('div');tr.className='pn-track';sec.parentNode.insertBefore(tr,sec);tr.appendChild(sec);pins.push({sec:sec,tr:tr,extra:extra,fn:fn,T:0,head:!!head,free:!!free});}
   function stag(items,p,a,b){var n=items.length;items.forEach(function(e,i){var s=a+i*((b-a)/Math.max(1,n)),k=ease(cl((p-s)/.18));e.style.setProperty('--o',k.toFixed(3));e.style.setProperty('--y',((1-k)*28).toFixed(1)+'px');});}
   /* Plataformas (opción actual): el carrusel avanza en horizontal con el scroll */
   var rail=document.getElementById('cats');window.railScroll=true;
@@ -1806,11 +1826,11 @@ html.phone .device.mobile .viewport{border-radius:0}
   pin(document.getElementById('faq'),.45,function(){},true); /* se traba con el encabezado de la sección arriba; después sigue */
   /* Cierre: la card aparece completa (sin animar su contenido) y crece apenas con el scroll */
   var cl2=document.querySelector('.closer');
-  pin(cl2,.7,function(p,s){var card=s.querySelector('.closer-card');if(card)card.style.setProperty('--cs',(.92+.08*ease(cl(p/.4))).toFixed(3));});
+  pin(cl2,0,function(p,s){var card=s.querySelector('.closer-card');if(card)card.style.setProperty('--cs',(.92+.08*ease(cl(p/.4))).toFixed(3));},false,true); /* no se fija: aparece junto con el footer */
   function setup(){var hd=document.querySelector('.l-header'),hh=hd?hd.offsetHeight:72,vh=vp.clientHeight;
     pins.forEach(function(o){o.tr.style.height='';if(!o.sec.offsetParent)return;var H=o.sec.offsetHeight;
       /* si el bloque no entra entero bajo el header (p. ej. preguntas en mobile), no se fija: se anima a medida que entra */
-      o.nopin=!o.head&&H>vh-hh-8;o.tr.classList.toggle('nopin',o.nopin);if(o.nopin){o.sec.style.top='';return;}
+      o.nopin=o.free||(!o.head&&H>vh-hh-8);o.tr.classList.toggle('nopin',o.nopin);if(o.nopin){o.sec.style.top='';return;}
       o.T=o.head?hh:Math.min(hh,vh-H);o.sec.style.top=o.T+'px';o.tr.style.height=(H+Math.round(vh*o.extra))+'px';});upd();}
   function upd(){pins.forEach(function(o){if(!o.sec.offsetParent)return;var start=off(o.tr)-o.T-vp.clientHeight*.25,run=o.tr.offsetHeight-o.sec.offsetHeight+vp.clientHeight*.25;
     if(o.nopin){o.fn(cl((vp.scrollTop+vp.clientHeight*.9-off(o.tr))/o.sec.offsetHeight),o.sec);return;}
