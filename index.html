@@ -623,7 +623,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 
 
 /* Plataformas opción B · Scroll: escenario fijo oscuro; el scroll revela título y cards flotando */
-.plx{display:none;position:relative;background:#1C1C4F;color:#fff;font-family:var(--f-brand);height:calc(var(--vph,720px) * 2.2)}
+.plx{display:none;position:relative;background:#1C1C4F;color:#fff;font-family:var(--f-brand);height:calc(var(--vph,720px) * 1.8)}
 .pl-wrap:is([data-pl="B"],[data-pl="C"]) #plataformas{display:none}
 .pl-wrap:is([data-pl="B"],[data-pl="C"]) .plx{display:block}
 /* Opción B: violeta de marca (el mismo del hero) e íconos en blanco; sin bajada */
@@ -665,8 +665,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .plx-c b{display:block;font-size:16px;font-weight:700;line-height:1.2}
 .plx-c small{display:block;margin-top:2px;font-size:12px;color:rgba(255,255,255,.6);max-width:180px;overflow:hidden;text-overflow:ellipsis}
 @keyframes plxf{from{transform:translate(0,-7px) rotate(-.6deg)}to{transform:translate(4px,7px) rotate(.6deg)}}
-.mobile .plx{height:calc(var(--vph,716px) * 2)}
-.mobile .plx-cards.tw .plx-c{transition:opacity .5s ease,transform .5s ease}
+.mobile .plx{height:calc(var(--vph,716px) * 1.2)}
+.mobile .plx-cards.tw .plx-c{transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1)}
 .mobile .plx-stage{padding-top:64px}
 .mobile .plx-cards{inset:64px 0 0 0}
 .mobile .plx-copy{padding:0 20px}
@@ -713,7 +713,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 
 /* Resto de bloques con scroll: quedan fijos y el scroll maneja su animación; al terminar, sigue la página */
 .pn-track{position:relative}
-.pn-track > section{position:sticky}
+.pn-track > section,.pn-track > .pn-group{position:sticky}
 .pn-track.nopin > section{position:relative}
 .pn-track .rtrack{animation:none!important}
 .pn-track .reviews{overflow-x:auto;scrollbar-width:none;overscroll-behavior-x:contain}
@@ -727,7 +727,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 
 /* Cómo funciona: card más alta, avatares y títulos más grandes */
 #how .b2-card{min-height:400px}
-.b2-track.pin > .b2{padding-top:48px;padding-bottom:48px}
+.b2-track.pin > .b2{padding-top:48px;padding-bottom:48px;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box}
 .mobile .b2-track.pin > .b2{padding-top:36px;padding-bottom:36px}
 #how .b2-slots{padding:40px 0}
 #how .b2-av{width:76px;height:76px}
@@ -746,6 +746,11 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .desktop #how .b2-side{display:flex;flex-direction:column;justify-content:center;padding:0 24px}
 .desktop #how .b2-caption{display:grid;grid-template-columns:48px 1fr;column-gap:18px;align-items:center;min-height:120px}
 .desktop #how .b2-cnum{grid-row:1 / span 2;width:48px;height:48px;font-style:normal;font-size:18px;background:#fff;color:var(--ink);box-shadow:0 0 0 1px var(--line)}
+/* título y descripción del paso pegados (sin repartir el alto entre las filas) */
+#how .b2-caption{align-content:center;grid-template-rows:auto auto;row-gap:2px}
+#how .b2-caption b{margin-bottom:0!important;align-self:end}
+#how .b2-caption span{align-self:start}
+#how .b2-cnum.run .b2-nr circle{opacity:1;animation:b2ring var(--dur) linear forwards}
 .desktop #how .b2-caption b{display:block;font-size:24px;font-weight:700;line-height:1.2;margin-bottom:6px}
 .desktop #how .b2-caption span{display:block;font-size:17px;line-height:1.45;color:var(--ink-2)}
 .desktop #how .b2-card{min-height:320px}
@@ -773,6 +778,24 @@ html.phone .device.mobile .viewport{border-radius:0}
 .hero-track.pin .hm{padding:20px 0 28px!important;justify-content:flex-start!important}
 .mobile .hero-track .h2x{padding-top:28px!important}
 .mobile .hero-track .h2x[data-av="card2"] .hc{margin-top:24px!important;margin-bottom:20px!important}
+
+/* Panel de Cómo funciona: solo la esquina pegada a la solapa activa queda recta */
+#how[data-role="dueno"] .b2-panel{border-radius:0 16px 16px 16px}
+#how[data-role="miembro"] .b2-panel{border-radius:16px 16px 16px 16px}
+.mobile #how[data-role="dueno"] .b2-panel{border-radius:0 14px 14px 14px}
+.mobile #how[data-role="miembro"] .b2-panel{border-radius:14px 0 14px 14px}
+
+/* Encabezado de la card de Cómo funciona más grande, acorde al resto */
+#how .b2-head{gap:16px;padding-bottom:20px}
+#how .b2-ico{width:56px;height:56px;border-radius:14px}
+#how .b2-ico svg{width:30px;height:30px}
+#how .b2-head b{font-size:24px}
+#how .b2-head small{font-size:15px;margin-top:2px}
+.mobile #how .b2-head{gap:12px;padding-bottom:14px}
+.mobile #how .b2-ico{width:44px;height:44px;border-radius:12px}
+.mobile #how .b2-ico svg{width:24px;height:24px}
+.mobile #how .b2-head b{font-size:18px}
+.mobile #how .b2-head small{font-size:13px}
 
 /* Hero opción C: sin recuadro ni encabezado de grupo */
 .h2x[data-av="card2"] .hc{border:0;padding:0;border-radius:0;background:none}
@@ -1021,7 +1044,7 @@ html.phone .device.mobile .viewport{border-radius:0}
       <button type="button" id="b-mob" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>Mobile</button>
     </div>
     <div class="seg" role="group" aria-label="Variante de copy"><button type="button" data-lang="neutro" aria-pressed="true">Copy: Neutro</button><button type="button" data-lang="rio" aria-pressed="false">Rioplatense</button></div>
-    <div class="seg" role="group" aria-label="Opción de plataformas"><button type="button" data-plopt="O" aria-pressed="true">Plataformas: actual</button><button type="button" data-plopt="B" aria-pressed="false">B · Scroll</button><button type="button" data-plopt="C" aria-pressed="false">C · Naranja</button></div>
+    <div class="seg" role="group" aria-label="Opción de plataformas"><button type="button" data-plopt="O" aria-pressed="true">Plataformas: actual</button><button type="button" data-plopt="B" aria-pressed="false">B · Scroll</button></div>
     <button type="button" class="ghost" id="restart">Volver al inicio</button>
   </div>
 </header>
@@ -1518,6 +1541,7 @@ html.phone .device.mobile .viewport{border-radius:0}
   /* control externo para el modo scroll: fija rol y paso sin temporizador */
   window.b2Set=function(r,i){if(r!==role){role=r;root.dataset.role=r;btns.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.r===r)});slots.forEach(function(el){delete el.dataset.kind});build();step=-1;}
     clearTimeout(timer);if(i!==step){step=i;render();}};
+  window.b2Restart=function(){go(0)};
   btns.forEach(function(b){b.onclick=function(){if(window.b2Jump)b2Jump(b.dataset.r);else setRole(b.dataset.r)}});
   setRole('dueno');
 })();
@@ -1553,9 +1577,11 @@ html.phone .device.mobile .viewport{border-radius:0}
   slots[0].querySelector('.hc-av').innerHTML=imgs[0]?'<img alt="" src="'+imgs[0]+'">':'';
   var k=0;
   function fitW(box,el){if(box.classList.contains('hc-rot')){box.style.width=Math.ceil(el.scrollWidth+1)+'px';}}
-  function roll(box,html,first){var nu=document.createElement('span');nu.innerHTML=html;var old=box.firstElementChild;if(first||!old){box.innerHTML='';box.appendChild(nu);fitW(box,nu);return;}
+  function roll(box,html,first){var nu=document.createElement('span');nu.innerHTML=html;var old=box.firstElementChild;if(first||!old){box.innerHTML='';box.appendChild(nu);box.style.width='';return;}
     old.classList.add('out');nu.style.transform='translateY(-100%)';nu.style.opacity='0';box.appendChild(nu);fitW(box,nu);void nu.offsetWidth;
-    nu.style.transform='';nu.style.opacity='';old.style.transform='translateY(100%)';old.style.opacity='0';setTimeout(function(){old.remove();},650);}
+    nu.style.transform='';nu.style.opacity='';old.style.transform='translateY(100%)';old.style.opacity='0';
+    /* al terminar el cambio, el ancho vuelve a ser el natural del texto (no queda cortado si cambia la tipografía o el tamaño) */
+    setTimeout(function(){old.remove();if(box.children.length===1)box.style.width='';},650);}
   function setCat(first){var c=cats[k%cats.length];roll(rot,c[0],first);roll(ic,'<svg viewBox="0 0 24 24">'+c[1]+'</svg>',first);}
   var timers=[],rotT=null;
   function later(fn,ms){timers.push(setTimeout(fn,ms));}
@@ -1602,7 +1628,7 @@ html.phone .device.mobile .viewport{border-radius:0}
   var slots=[0,1,2,3],ptr=4,rotOn=false,rotT=null,rs=0;
   function setSlot(c,j){c.style.setProperty('--x',MPOS[j][0]+'%');c._y=MPOS[j][1];}
   function startRot(){if(rotOn)return;rotOn=true;box.classList.add('tw');rotT=setInterval(function(){
-    if(!sec.offsetParent)return;var j=rs%4;rs++;var nx=ptr;for(var g=0;g<cards.length&&slots.indexOf(nx)>=0;g++)nx=(nx+1)%cards.length;
+    if(!mobQ()){stopRot();return;}if(!sec.offsetParent)return;var j=rs%4;rs++;var nx=ptr;for(var g=0;g<cards.length&&slots.indexOf(nx)>=0;g++)nx=(nx+1)%cards.length;
     ptr=(nx+1)%cards.length;setSlot(cards[nx],j);slots[j]=nx;upd();},1600);}
   function stopRot(){if(!rotOn)return;rotOn=false;clearInterval(rotT);box.classList.remove('tw');slots=[0,1,2,3];ptr=4;rs=0;place();}
   function place(){var mob=document.getElementById('device').classList.contains('mobile');
@@ -1616,17 +1642,19 @@ html.phone .device.mobile .viewport{border-radius:0}
     copy.style.setProperty('--to',tp);copy.style.setProperty('--ty',(1-tp)*40+'px');
     stage.style.setProperty('--glowo',tp);stage.style.setProperty('--glow',.6+.4*ease(cl(p/.6)));
     var vis=cards.filter(function(c){return c.offsetParent!==null}),H=box.clientHeight;
-    vis.forEach(function(c){var h=c.offsetHeight,m=h/2+(mobQ()?4:14);c.style.setProperty('--y',Math.max(m,Math.min(H-m,c._y/100*H))+'px');});
-    var mob=mobQ(),n=vis.length,d=.6/Math.max(1,n),S0=.12;
+    vis.forEach(function(c){var h=c.offsetHeight,m=h/2+(mobQ()?4:14),mb=h/2+(mobQ()?28:36);c.style.setProperty('--y',Math.max(m,Math.min(H-mb,c._y/100*H))+'px');});
+    /* recorrido corto: apenas están todas las cards, la sección se suelta */
+    var mob=mobQ(),n=vis.length,d=.75/Math.max(1,n),S0=mob?.2:.1;
     if(mob){
       /* mobile: las primeras 4 entran con el scroll; cuando están las 4, se reemplazan solas cada ~2,5 s (sin scrollear) */
-      var D=.34/4,END=S0+3*D+.08;
+      var D=.56/4,END=S0+3*D+.16;
+      function sm(v){return v*v*(3-2*v)}
       if(p>=END&&!reduce)startRot();else if(p<END)stopRot();
       cards.forEach(function(c,i){var j=slots.indexOf(i),co=0,py=24;
-        if(j>=0){var cp=rotOn?1:ease(cl((p-(S0+j*D))/.06));co=cp;py=(1-cp)*36;}
+        if(j>=0){var cp=rotOn?1:sm(cl((p-(S0+j*D))/.16));co=cp;py=(1-cp)*24;}
         c.style.setProperty('--co',co);c.style.setProperty('--cs',(.86+.14*co).toFixed(3));c.style.pointerEvents=co>.5?'':'none';c.style.setProperty('--py',py+'px');});
-    }else
-    vis.forEach(function(c,k){var s=S0+k*d,cp=ease(cl((p-s)/.14));
+    }else{if(rotOn)stopRot();}
+    if(!mob)vis.forEach(function(c,k){var s=S0+k*d,cp=ease(cl((p-s)/.1));
       c.style.setProperty('--co',cp);c.style.setProperty('--cs',.86+.14*cp);
       c.style.pointerEvents=cp>.5?'':'none';
       c.style.setProperty('--py',((1-cp)*60+(.8-p)*40*(c._d||.6))+'px');});
@@ -1638,7 +1666,7 @@ html.phone .device.mobile .viewport{border-radius:0}
     var b=e.target.closest('[data-plopt]');
     if(b){wrap.dataset.pl=b.dataset.plopt;document.querySelectorAll('[data-plopt]').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
       setTimeout(function(){place();upd();if(b.dataset.plopt!=='O'){vp.scrollTop=sec.offsetTop-Math.round(vp.clientHeight*.6);upd();}},30);}
-    if(e.target.closest('#b-mob,#b-desk'))setTimeout(function(){place();upd()},60);
+    if(e.target.closest('#b-mob,#b-desk'))setTimeout(function(){stopRot();place();upd()},60);
   });
   place();upd();
 })();
@@ -1756,25 +1784,36 @@ html.phone .device.mobile .viewport{border-radius:0}
     var hc=hsw.querySelector('.hc'),hr=hsw.getBoundingClientRect(),hcOff=hc?(hc.getBoundingClientRect().top-hr.top)/((hr.height/H)||1):0;
     var hd=document.querySelector('.l-header'),hh=hd?hd.offsetHeight:72;
     /* abajo: el bloque de métricas con su alto natural; arriba: lo que entre del hero (lo que quede bajo el header se desvanece) */
-    T=Math.min(hh,(vh-M)-H);duo.style.top=T+'px';hhT=hh;
-    txt.forEach(function(el){var er=el.getBoundingClientRect(),hr2=hsw.getBoundingClientRect(),kk=(hr2.height/H)||1;el._pt=T+(er.top-hr2.top)/kk;});tr.style.height=(duo.offsetHeight+Math.round(vh*EXTRA))+'px';upd();
+    /* fijo: el gráfico queda justo debajo del header (el título, la bajada y el CTA se van), y el bloque de métricas
+       toma el resto de la pantalla con las cards centradas. Si no entra, el gráfico sube lo necesario */
+    T=Math.min(hh+16-hcOff,(vh-M)-H);duo.style.top=T+'px';hhT=hh;
+    /* desktop: las 3 métricas ya se ven de entrada, así que no hace falta fijar; mobile: fijo mientras entran las cards */
+    var dk=dev.classList.contains('desktop');hm.style.minHeight=dk?'':Math.max(M,vh-(T+H))+'px';
+    txt.forEach(function(el){var er=el.getBoundingClientRect(),hr2=hsw.getBoundingClientRect(),kk=(hr2.height/H)||1;el._pt=T+(er.top-hr2.top)/kk;});tr.style.height=(duo.offsetHeight+(dk?0:Math.round(vh*EXTRA)))+'px';upd();
   }
+  /* al abrir la página, las cifras visibles cuentan desde 0 (desktop: las 3; mobile: la primera, que asoma de entrada) */
+  var counted=false,cIv=null;function countOnce(){if(counted)return;counted=true;var t0=Date.now()+600;var cs=[].slice.call(box.querySelectorAll(dev.classList.contains('desktop')?'.cnt':'.sp-b > :first-child .cnt'));
+    cs.forEach(function(c){c.textContent=(c.dataset.pre||'')+fmt(0,+c.dataset.dec)+(c.dataset.suf||'');});
+    clearInterval(cIv);var iv=cIv=setInterval(function(){var k=Math.max(0,Math.min(1,(Date.now()-t0)/1600)),e=1-Math.pow(1-k,3);cs.forEach(function(c){c.textContent=(c.dataset.pre||'')+fmt(parseFloat(c.dataset.to)*e,+c.dataset.dec)+(c.dataset.suf||'');});if(k>=1)clearInterval(iv);},30);}
   function upd(){
     if(!on())return;
     var start=tr.offsetTop-T,run=tr.offsetHeight-duo.offsetHeight,y=vp.scrollTop-start;
     if(vp.scrollTop>8)finalState();
     /* el título, la bajada y el CTA se desvanecen antes de que el hero quede fijo: arriba solo queda el gráfico */
-    var fo=cl((start-vp.scrollTop)/Math.max(1,Math.min(140,start)));txt.forEach(function(el){el.style.opacity=(el._pt!==undefined&&el._pt>=hhT+8)?1:fo.toFixed(3);});
+    var fo=cl((start-vp.scrollTop)/Math.max(1,Math.min(140,start)));txt.forEach(function(el){el.style.opacity=fo.toFixed(3);});
     var p=reduce?1:cl(y/Math.max(1,run));
+    /* desktop: las 3 métricas se ven de entrada (las cifras cuentan una vez al cargar); mobile: entran con el scroll */
+    if(dev.classList.contains('desktop')){its.forEach(function(e){e.style.setProperty('--io',1);e.style.setProperty('--iy','0px');});countOnce();return;}
     its.forEach(function(e,i){var s=i===0?-1:.04+(i-1)*.3,k=ease(cl((p-s)/.2));
       e.style.setProperty('--io',k.toFixed(3));e.style.setProperty('--iy',((1-k)*24).toFixed(1)+'px');
+      if(i===0){countOnce();return;}
       e.querySelectorAll('.cnt').forEach(function(c){var kc=ease(cl((p-s)/.3));c.textContent=(c.dataset.pre||'')+fmt(parseFloat(c.dataset.to)*kc,+c.dataset.dec)+(c.dataset.suf||'');});});
   }
   /* si la animación automática del hero se dispara con la página scrolleada, mantiene el estado final */
   var hp=window.hcPlay;if(hp)window.hcPlay=function(){if(on()&&vp.scrollTop>8){final=false;finalState();return;}hp();};
   vp.addEventListener('scroll',upd,{passive:true});
   window.addEventListener('resize',setup);
-  document.addEventListener('click',function(e){if(e.target.closest('#b-mob,#b-desk,[data-spopt],#restart')){final=false;setTimeout(setup,90);}});
+  document.addEventListener('click',function(e){if(e.target.closest('#b-mob,#b-desk,[data-spopt],#restart')){final=false;counted=false;setTimeout(setup,90);}});
   setup();setTimeout(setup,400);if(document.fonts)document.fonts.ready.then(setup);
 })();
 </script>
@@ -1787,8 +1826,21 @@ html.phone .device.mobile .viewport{border-radius:0}
   var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduce)return;
   var tr=document.createElement('div');tr.className='b2-track pin';sec.parentNode.insertBefore(tr,sec);tr.appendChild(sec);
   var EXTRA=.5;
-  function setup(){var hd=document.querySelector('.l-header'),hh=hd?hd.offsetHeight:72,vh=vp.clientHeight,H=sec.offsetHeight;
-    sec.style.top=Math.min(hh,vh-H)+'px';tr.style.height=(H+Math.round(vh*EXTRA))+'px';}
+  /* al aparecer, la sección sube y comprime el blanco que queda debajo de las métricas (deja 24 px) */
+  var base=0,gap=0;
+  function measure(){tr.style.marginTop='';var ht=document.getElementById('herotrack'),hm=ht&&ht.querySelector('.hm'),cs=hm?hm.querySelectorAll('.sp-b > *'):[];
+    base=tr.offsetTop;if(!hm||!cs.length||!hm.offsetParent){gap=0;return;}var last=cs[cs.length-1];
+    var cardBottom=ht.offsetTop+ht.offsetHeight-hm.offsetHeight+last.offsetTop+last.offsetHeight;gap=Math.max(0,base-cardBottom-24);}
+  /* el hueco se cierra de forma lineal desde que la sección entra por abajo hasta que su borde superior llega a donde se fija */
+  function lift(){if(!gap){tr.style.marginTop='';return;}var vh=vp.clientHeight,top=parseFloat(sec.style.top)||0,s0=base-vh,s1=base-gap-top,p=Math.max(0,Math.min(1,(vp.scrollTop-s0)/Math.max(1,s1-s0)));tr.style.marginTop=(-gap*p).toFixed(1)+'px';}
+  vp.addEventListener('scroll',lift,{passive:true});
+  /* cada vez que la sección entra en pantalla, los pasos arrancan desde el 1 */
+  var seen=false;function watch(){var r=sec.getBoundingClientRect(),R=vp.getBoundingClientRect(),vis=r.top<R.bottom-40&&r.bottom>R.top+40;if(vis&&!seen&&window.b2Restart)b2Restart();seen=vis;}
+  vp.addEventListener('scroll',watch,{passive:true});
+  function setup(){var hd=document.querySelector('.l-header'),hh=hd?hd.offsetHeight:72,vh=vp.clientHeight;
+    /* fija, ocupa todo el alto bajo el header (sin franja blanca abajo) con el contenido centrado */
+    sec.style.minHeight='';var H0=sec.offsetHeight;sec.style.minHeight=Math.max(H0,vh-hh)+'px';var H=sec.offsetHeight;
+    sec.style.top=Math.min(hh,vh-H)+'px';tr.style.height=(H+Math.round(vh*EXTRA))+'px';setTimeout(function(){measure();lift();},60);}
   window.addEventListener('resize',setup);
   document.addEventListener('click',function(e){if(e.target.closest('#b-mob,#b-desk,#restart'))setTimeout(setup,120);});
   setup();setTimeout(setup,500);if(document.fonts)document.fonts.ready.then(setup);
@@ -1821,16 +1873,24 @@ html.phone .device.mobile .viewport{border-radius:0}
       else{if(box.scrollLeft>=half)box.scrollLeft-=half;pos=box.scrollLeft;}
       }
     setInterval(step,16);})();
-  pin(rv&&rv.closest('section'),.45,function(p,s){var its=[].slice.call(s.querySelectorAll('.l-wrap > .eyebrow, .l-wrap > .h2, .l-wrap > .lead, .reviews'));its.forEach(function(e){e.classList.add('pn-it')});stag(its,p,0,.55);});
+  pin(rv&&rv.closest('section'),.45,function(p,s){var its=[].slice.call(s.querySelectorAll('.l-wrap > .eyebrow, .l-wrap > .h2, .l-wrap > .lead, .reviews'));its.forEach(function(e){e.classList.add('pn-it')});
+    /* entra rápido: se completa cuando la sección llega a la mitad de la pantalla, sin esperar a que se fije */
+    var R=vp.getBoundingClientRect(),k=R.height/vp.clientHeight,top=(s.getBoundingClientRect().top-R.top)/k,q=cl((vp.clientHeight-top)/(vp.clientHeight*.5));stag(its,q,0,.35);});
   /* Preguntas frecuentes: queda fija brevemente; su contenido aparece completo, sin animarse */
-  pin(document.getElementById('faq'),.45,function(){},true); /* se traba con el encabezado de la sección arriba; después sigue */
+  pin(document.getElementById('faq'),.45,function(){},true);pins[pins.length-1].fill=true; /* se traba con el encabezado de la sección arriba; después sigue */
   /* Cierre: la card aparece completa (sin animar su contenido) y crece apenas con el scroll */
-  var cl2=document.querySelector('.closer');
-  pin(cl2,0,function(p,s){var card=s.querySelector('.closer-card');if(card)card.style.setProperty('--cs',(.92+.08*ease(cl(p/.4))).toFixed(3));},false,true); /* no se fija: aparece junto con el footer */
+  /* cierre + footer juntos: se fijan con el cierre arriba (debajo del header) y el footer asomando abajo; después se sueltan */
+  var cl2=document.querySelector('.closer'),ft=document.querySelector('.l-footer');
+  if(cl2&&ft&&cl2.nextElementSibling===ft){var grp=document.createElement('div');grp.className='pn-group';cl2.parentNode.insertBefore(grp,cl2);grp.appendChild(cl2);grp.appendChild(ft);}
+  pin(grp||cl2,.45,function(p,s){var card=s.querySelector('.closer-card');if(card)card.style.setProperty('--cs',(.92+.08*ease(cl(p/.4))).toFixed(3));},true);
   function setup(){var hd=document.querySelector('.l-header'),hh=hd?hd.offsetHeight:72,vh=vp.clientHeight;
-    pins.forEach(function(o){o.tr.style.height='';if(!o.sec.offsetParent)return;var H=o.sec.offsetHeight;
+    /* no se resetea el alto de la pista antes de medir: así abrir una pregunta no hace saltar la sección */
+    pins.forEach(function(o){if(o.fill&&o.filled&&o._vw!==vp.clientWidth+'x'+vh){o.filled=false;o.sec.style.paddingTop='';o.sec.style.minHeight='';}o._vw=vp.clientWidth+'x'+vh;if(!o.sec.offsetParent){o.tr.style.height='';return;}
+      /* preguntas: fija, ocupa todo el alto bajo el header con el contenido centrado (se calcula una vez; abrir preguntas no lo mueve) */
+      if(o.fill&&!o.filled){var pt=parseFloat(getComputedStyle(o.sec).paddingTop)||0,H0=o.sec.offsetHeight,ex=(vh-hh)-H0;if(ex>0){o.sec.style.paddingTop=(pt+ex/2)+'px';o.sec.style.minHeight=(vh-hh)+'px';o.sec.style.boxSizing='border-box';}o.filled=true;}
+      var H=o.sec.offsetHeight;
       /* si el bloque no entra entero bajo el header (p. ej. preguntas en mobile), no se fija: se anima a medida que entra */
-      o.nopin=o.free||(!o.head&&H>vh-hh-8);o.tr.classList.toggle('nopin',o.nopin);if(o.nopin){o.sec.style.top='';return;}
+      o.nopin=o.free||(!o.head&&H>vh-hh-8);o.tr.classList.toggle('nopin',o.nopin);if(o.nopin){o.sec.style.top='';o.tr.style.height='';return;}
       o.T=o.head?hh:Math.min(hh,vh-H);o.sec.style.top=o.T+'px';o.tr.style.height=(H+Math.round(vh*o.extra))+'px';});upd();}
   function upd(){pins.forEach(function(o){if(!o.sec.offsetParent)return;var start=off(o.tr)-o.T-vp.clientHeight*.25,run=o.tr.offsetHeight-o.sec.offsetHeight+vp.clientHeight*.25;
     if(o.nopin){o.fn(cl((vp.scrollTop+vp.clientHeight*.9-off(o.tr))/o.sec.offsetHeight),o.sec);return;}
