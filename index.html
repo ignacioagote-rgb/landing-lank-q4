@@ -797,6 +797,87 @@ html.phone .device.mobile .viewport{border-radius:0}
 .mobile #how .b2-head b{font-size:18px}
 .mobile #how .b2-head small{font-size:13px}
 
+/* Cómo funciona: sin el escudo verde del paso 3 */
+#how .b2-shield{display:none!important}
+
+/* Plataformas en desktop: cards más grandes */
+.desktop .plx-c button{gap:14px;padding:16px 24px 16px 16px;border-radius:18px}
+.desktop .plx-c .ic{width:52px;height:52px;border-radius:14px}
+.desktop .plx-c .ic svg{width:28px;height:28px}
+.desktop .plx-c b{font-size:19px}
+.desktop .plx-c small{font-size:14px;max-width:230px;margin-top:3px}
+
+/* Métricas del hero más altas (menos blanco debajo) */
+.desktop .hm .spb-main,.desktop .hm .spb-row{padding:30px 26px!important}
+.mobile .hm .spb-main,.mobile .hm .spb-row{padding:20px 16px!important}
+
+/* Indicador de scroll en el lugar de las métricas */
+.hm{position:relative}
+.hm-cue{display:none}
+.hero-track .hsw{position:relative}
+.hero-track .h2x{padding-bottom:96px!important}
+.mobile .hero-track .h2x{padding-bottom:84px!important}
+.hero-track.pin .hm-cue{display:grid;place-items:center;position:absolute;left:50%;bottom:24px;margin-left:-26px;width:52px;height:52px;border-radius:50%;border:1.5px solid rgba(255,255,255,.55);background:rgba(255,255,255,.1);cursor:pointer;z-index:2;padding:0}
+.mobile .hero-track.pin .hm-cue{bottom:18px}
+.hm-cue svg{width:22px;height:22px;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;animation:cueb 1.4s ease-in-out infinite}
+@keyframes cueb{0%,100%{transform:translateY(-3px)}50%{transform:translateY(4px)}}
+@media (prefers-reduced-motion: reduce){.hm-cue svg{animation:none}}
+
+/* Métricas: mismo aire arriba que abajo */
+.desktop .hero-track.pin .hm{padding-top:58px!important;padding-bottom:28px!important}
+.mobile .hero-track.pin .hm{padding-top:56px!important}
+
+/* Cómo funciona: el panel con línea gris como las otras cards; la solapa activa se une al panel */
+#how .b2-panel{border:1px solid var(--line)!important}
+#how .b2-tabs button{border:1px solid transparent;border-bottom:0}
+#how .b2-tabs button[aria-pressed="true"]{border-color:var(--line);margin-bottom:-1px;position:relative;z-index:2}
+
+/* Métricas sin cards: número grande violeta, ícono arriba, separadores finos */
+.hm.nc{overflow:visible}
+.hm.nc .spb-main,.hm.nc .spb-row{background:none!important;border:0!important;box-shadow:none!important;border-radius:0!important;padding:10px 24px!important;
+  transform:translateY(var(--iy,0px)) scale(var(--sc,1))!important;transform-origin:left center;position:relative;z-index:2}
+.hm.nc .spb-n,.hm.nc .spb-v{color:var(--ink)!important;font-size:72px!important;line-height:1!important}
+.hm.nc .spb-v small{font-size:24px!important}
+.hm.nc .spb-l,.hm.nc .spb-t{font-size:18px!important}
+.hm.nc .spb-main::before,.hm.nc .spb-ic{width:52px!important;height:52px!important;background-size:26px!important}
+.hm.nc .spb-ic svg{width:26px;height:26px}
+.hm.nc .spb-v small{color:var(--ink)}
+/* más separación entre las tres */
+.desktop .hm.nc .sp-b{gap:0!important}
+.desktop .hm.nc .spb-main,.desktop .hm.nc .spb-row{padding:16px 32px!important}
+.desktop .hm.nc .spb-l,.desktop .hm.nc .spb-t{white-space:nowrap}
+.mobile .hm.nc .sp-b{gap:22px!important}
+.mobile .hm.nc .sp-b > * + *{padding-top:24px!important}
+.hm.nc .spb-l,.hm.nc .spb-t{margin-top:2px!important}
+.desktop .hm.nc .sp-b > * + *{border-left:1px solid var(--line)!important}
+.mobile .hm.nc .sp-b{gap:6px!important}
+.mobile .hm.nc .sp-b > * + *{border-top:1px solid var(--line)!important;padding-top:16px!important}
+.mobile .hm.nc .spb-n,.mobile .hm.nc .spb-v{font-size:52px!important}
+.mobile .hm.nc .spb-v small{font-size:18px!important}
+.mobile .hm.nc .spb-l,.mobile .hm.nc .spb-t{font-size:15px!important}
+.mobile .hm.nc .spb-main::before,.mobile .hm.nc .spb-ic{width:44px!important;height:44px!important}
+/* sin cards: las métricas centradas en el bloque blanco (mismo aire arriba y abajo) */
+.hero-track.pin .hm.nc,.desktop .hero-track.pin .hm.nc,.mobile .hero-track.pin .hm.nc{justify-content:center!important;padding-top:24px!important;padding-bottom:24px!important}
+/* cuando el número termina de aparecer, se dibuja la card detrás */
+.hm.nc .sp-b,.desktop .hm.nc .sp-b{gap:20px!important}
+.mobile .hm.nc .sp-b{gap:14px!important}
+.hm.nc .sp-b > *,.desktop .hm.nc .sp-b > *,.desktop .hm.nc .sp-b > * + *,.mobile .hm.nc .sp-b > *,.mobile .hm.nc .sp-b > * + *{
+  padding:26px 28px!important;border:1px solid rgba(237,237,237,var(--cb,0))!important;border-radius:20px!important;
+  background:rgba(255,255,255,var(--cb,0))!important;box-shadow:0 8px 24px rgba(20,20,70,calc(.08*var(--cb,0)))!important}
+.mobile .hm.nc .sp-b > *,.mobile .hm.nc .sp-b > * + *{padding:18px 18px!important}
+
+/* Métricas como bloque propio (orden: Cómo funciona → Métricas) */
+.hm.out{display:block!important;background:#fff;padding:72px 0 80px!important}
+.mobile .hm.out{padding:48px 0 56px!important}
+
+/* Carrusel de reseñas de borde a borde de la pantalla */
+.desktop .reviews{margin-left:calc(50% - 640px)!important;margin-right:calc(50% - 640px)!important}
+.mobile .reviews{margin-left:-24px!important;margin-right:-24px!important}
+
+/* Bloque unificado reseñas + preguntas */
+.rv-faq .faq-grid{margin-top:88px}
+.mobile .rv-faq .faq-grid{margin-top:56px}
+
 /* Hero opción C: sin recuadro ni encabezado de grupo */
 .h2x[data-av="card2"] .hc{border:0;padding:0;border-radius:0;background:none}
 .h2x[data-av="card2"] .hc-head{display:none}
@@ -853,7 +934,7 @@ html.phone .device.mobile .viewport{border-radius:0}
 .b2-slot.you .b2-av{background:#4242B2;border:2px solid #4242B2;color:#fff;box-shadow:0 0 0 4px #CFCFF2;animation:b2pop .45s cubic-bezier(.3,1.6,.5,1) both}
 .b2-av img{width:100%;height:100%;display:block;object-fit:cover;transform:scale(1.04)}
 .b2-av:has(img){border:0!important;overflow:hidden}
-.b2-slot.you em,.b2-slot.free em{color:#4242B2;font-weight:500}
+.b2-slot.you em,.b2-slot.free em{color:var(--ink-2)}
 .b2-slot.free .b2-av{border-color:#4242B2;color:#4242B2;animation:b2pulse 1.4s ease-in-out infinite}
 @keyframes b2pop{0%{transform:scale(.4)}100%{transform:scale(1)}}
 @keyframes b2pulse{0%,100%{box-shadow:0 0 0 0 rgba(66,66,178,.35)}50%{box-shadow:0 0 0 7px rgba(66,66,178,0)}}
@@ -1043,8 +1124,9 @@ html.phone .device.mobile .viewport{border-radius:0}
       <button type="button" id="b-desk" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>Desktop</button>
       <button type="button" id="b-mob" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>Mobile</button>
     </div>
+    <div class="seg" role="group" aria-label="Estilo de métricas"><button type="button" data-met="cards" aria-pressed="true">Métricas: cards</button><button type="button" data-met="nc" aria-pressed="false">Sin cards</button></div>
+    <div class="seg" role="group" aria-label="Orden de bloques"><button type="button" data-ord="a" aria-pressed="true">Orden: Métricas → Cómo funciona</button><button type="button" data-ord="b" aria-pressed="false">Cómo funciona → Métricas</button></div>
     <div class="seg" role="group" aria-label="Variante de copy"><button type="button" data-lang="neutro" aria-pressed="true">Copy: Neutro</button><button type="button" data-lang="rio" aria-pressed="false">Rioplatense</button></div>
-    <div class="seg" role="group" aria-label="Opción de plataformas"><button type="button" data-plopt="O" aria-pressed="true">Plataformas: actual</button><button type="button" data-plopt="B" aria-pressed="false">B · Scroll</button></div>
     <button type="button" class="ghost" id="restart">Volver al inicio</button>
   </div>
 </header>
@@ -1118,7 +1200,7 @@ html.phone .device.mobile .viewport{border-radius:0}
 <section class="b2" id="how" data-role="dueno" aria-labelledby="b2-title">
 <div class="l-wrap">
               <div class="b2-top">
-                <p class="eyebrow">Cómo funciona</p>
+                
                 <h2 class="h2" id="b2-title">Elige cómo quieres ahorrar</h2>
               </div>
               <div class="b2-tabs" role="group" aria-label="Elige un rol">
@@ -1167,7 +1249,7 @@ html.phone .device.mobile .viewport{border-radius:0}
             <div class="plx-stage">
               <div class="plx-cards" id="plx-cards"></div>
               <div class="plx-copy">
-                <p class="eyebrow">Plataformas</p>
+
                 <h2 id="plx-title">Más de 90 suscripciones para compartir</h2>
                 <div class="plx-tail">
                   <p>Encuentra grupos por categoría y paga solo tu parte cada mes.</p>
@@ -1178,22 +1260,16 @@ html.phone .device.mobile .viewport{border-radius:0}
           </section>
           </div>
 
-          <section class="band">
+          <section class="band soft rv-faq" id="faq">
             <div class="l-wrap">
-              <p class="eyebrow">Una comunidad que crece</p>
-              <h2 class="h2">Miles de personas ya dividen el costo de sus suscripciones</h2>
-              <p class="lead">Lank gestiona los pagos de cada grupo todos los meses, en cuatro países de Latinoamérica.</p>
+              <h2 class="h2">Esto dicen nuestros usuarios</h2>
               <div class="reviews"><div class="rtrack" id="reviews"></div></div>
-
             </div>
-          </section>
-
-          <section class="band soft" id="faq">
             <div class="l-wrap faq-grid">
               <div>
-                <p class="eyebrow">Preguntas frecuentes</p>
-                <h2 class="h2">Lo que todos preguntan antes de sumarse</h2>
-                <p class="lead" style="font-size:16px">Si te queda alguna duda, nuestro equipo de soporte te responde. Personas reales, no bots.</p>
+                
+                <h2 class="h2">Preguntas frecuentes</h2>
+                <p class="lead" style="font-size:16px">¿Dudas? Nuestro equipo de soporte te responde. Personas reales, no bots.</p>
               </div>
               <div class="acc" id="acc"></div>
             </div>
@@ -1634,7 +1710,7 @@ html.phone .device.mobile .viewport{border-radius:0}
     ptr=(nx+1)%cards.length;setSlot(cards[nx],j);slots[j]=nx;upd();},1600);}
   function stopRot(){if(!rotOn)return;rotOn=false;clearInterval(rotT);box.classList.remove('tw');slots=[0,1,2,3];ptr=4;rs=0;place();}
   function place(){var mob=document.getElementById('device').classList.contains('mobile');
-    cards.forEach(function(c,i){var j=slots.indexOf(i),p=mob?MPOS[j>=0?j:i%4]:POS[i];if(!p)return;c.style.setProperty('--x',p[0]+'%');c._y=p[1];c._d=POS[i][2];});}
+    cards.forEach(function(c,i){var j=slots.indexOf(i),p=mob?MPOS[j>=0?j:i%4]:POS[i];if(!p)return;c.style.setProperty('--x',p[0]+'%');c._x=mob?undefined:p[0];c._y=p[1];c._d=POS[i][2];});}
   function upd(){
     if(wrap.dataset.pl!=='B'&&wrap.dataset.pl!=='C')return;
     var vh=vp.clientHeight,lead=vh*.6,run=sec.offsetHeight-vh+lead,y=vp.scrollTop-sec.offsetTop+lead;
@@ -1644,7 +1720,9 @@ html.phone .device.mobile .viewport{border-radius:0}
     copy.style.setProperty('--to',tp);copy.style.setProperty('--ty',(1-tp)*40+'px');
     stage.style.setProperty('--glowo',tp);stage.style.setProperty('--glow',.6+.4*ease(cl(p/.6)));
     var vis=cards.filter(function(c){return c.offsetParent!==null}),H=box.clientHeight;
-    vis.forEach(function(c){var h=c.offsetHeight,m=h/2+(mobQ()?4:14),mb=h/2+(mobQ()?28:36);c.style.setProperty('--y',Math.max(m,Math.min(H-mb,c._y/100*H))+'px');});
+    var W=box.clientWidth;vis.forEach(function(c){var h=c.offsetHeight,m=h/2+(mobQ()?4:14),mb=h/2+(mobQ()?28:36);c.style.setProperty('--y',Math.max(m,Math.min(H-mb,c._y/100*H))+'px');
+      /* desktop: que ninguna card se salga por los costados */
+      if(!mobQ()&&c._x!==undefined){var w=c.offsetWidth,mx=w/2+20;c.style.setProperty('--x',Math.max(mx,Math.min(W-mx,c._x/100*W))+'px');}});
     /* recorrido corto: apenas están todas las cards, la sección se suelta */
     var mob=mobQ(),n=vis.length,d=.75/Math.max(1,n),S0=mob?.2:.1;
     if(mob){
@@ -1770,18 +1848,42 @@ html.phone .device.mobile .viewport{border-radius:0}
   var lw=document.createElement('div');lw.className='l-wrap';hm.appendChild(lw);var box=document.createElement('div');box.className='sp sp-b';lw.appendChild(box);
   [].slice.call(sp.querySelectorAll('.sp-b .spb-main,.sp-b .spb-row')).forEach(function(e){var c=e.cloneNode(true);c.classList.remove('sp-it');c.removeAttribute('style');box.appendChild(c);});
   duo.appendChild(hm);
-  var its=[].slice.call(box.children),EXTRA=1.1,final=false,T=0,hhT=72;
+  /* al inicio no se ven las métricas: en su lugar, un círculo con una flecha que invita a scrollear */
+  var cue=document.createElement('button');cue.type='button';cue.className='hm-cue';cue.setAttribute('aria-label','Ver más');cue.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>';hsw.appendChild(cue); /* va dentro del hero violeta, abajo al centro */
+  cue.addEventListener('click',function(){vp.scrollBy({top:Math.round(vp.clientHeight*.45),behavior:'smooth'});});
+  var its=[].slice.call(box.children),EXTRA=1.1,final=false,T=0,hhT=72,PBX=96,XPX=0,HCD=0;
   function on(){return sp.dataset.sp==='B'}
   var txt=[].slice.call(document.querySelectorAll('.h2x #h2x-title,.h2x .h2x-sub,.h2x .h2x-btn'));
   function finalState(){if(final)return;final=true;var hc=document.querySelector('.hc');if(!hc)return;
     hc.classList.add('st');hc.getAnimations({subtree:true}).forEach(function(a){try{a.finish()}catch(e){}});
     if(window.hcReset)hcReset();if(window.hcJoin){hcJoin(1);hcJoin(2);hcJoin(3);}if(window.hcSplit)hcSplit();}
+  var ORD='a';
+  /* Métricas "sin cards": cada número entra ~2,5x más grande y se achica hasta su tamaño final mientras cuenta; de a uno, con el scroll */
+  function nc(){return hm.classList.contains('nc')}
+  function post(){if(!on()||!nc())return;counted=true;clearInterval(cIv);
+    var vh=vp.clientHeight,sc=vp.scrollTop,Rv=vp.getBoundingClientRect(),kz=Rv.height/vh,mob=dev.classList.contains('mobile');
+    its.forEach(function(e,i){var k;
+      if(ORD==='b'){var top=(hm.getBoundingClientRect().top-Rv.top)/kz;k=cl((vh*.9-top)/(vh*.55)-i*.9);}
+      else{var start=tr.offsetTop-T,run=Math.max(1,tr.offsetHeight-duo.offsetHeight),p2=cl((sc-start+vh*.15)/(run+vh*.15));k=cl((p2-.04-i*.3)/.3);}
+      var cbv=cl((k-.8)/.2);e.style.setProperty('--cb',cbv.toFixed(3));k=cl(k/.8);
+      var ke=ease(k);e.style.setProperty('--io',Math.min(1,ke*1.6).toFixed(3));e.style.setProperty('--iy','0px');e.style.setProperty('--sc',(1+1.5*(1-ke)).toFixed(3));
+      e.querySelectorAll('.cnt').forEach(function(c){c.textContent=(c.dataset.pre||'')+fmt(parseFloat(c.dataset.to)*ke,+c.dataset.dec)+(c.dataset.suf||'');});});}
+  setTimeout(function(){vp.addEventListener('scroll',function(){post()},{passive:true});window.addEventListener('resize',function(){setTimeout(post,0)});},0); /* después del listener principal */
+  window.hmStyle=function(s){hm.classList.toggle('nc',s==='nc');counted=false;its.forEach(function(e){e.style.removeProperty('--sc');e.style.setProperty('--io',0);});
+    setTimeout(function(){window.dispatchEvent(new Event('resize'));vp.dispatchEvent(new Event('scroll'));post();},60);};
+  window.hmOrder=function(o){ORD=o;var b2=document.querySelector('.b2-track')||document.getElementById('how');
+    if(o==='b'){if(b2&&b2.parentNode)b2.parentNode.insertBefore(hm,b2.nextSibling);hm.classList.add('out');}
+    else{duo.appendChild(hm);hm.classList.remove('out');}
+    counted=false;its.forEach(function(e){e.style.setProperty('--io',0)});setTimeout(function(){window.dispatchEvent(new Event('resize'));vp.dispatchEvent(new Event('scroll'));},60);};
   function setup(){
     var act=on();tr.classList.toggle('pin',act);dev.classList.toggle('has-hm',act);
     if(!act){tr.style.height='';duo.style.top='';txt.forEach(function(el){el.style.opacity=''});return;}
+    var h2x=hsw.querySelector('.h2x');PBX=dev.classList.contains('mobile')?84:96;if(h2x)h2x.style.setProperty('padding-bottom',PBX+'px','important');
     /* responsive en alto: si el hero no entra entero en la pantalla (con la primera métrica asomando), su contenido se achica proporcionalmente */
-    var inn=hsw.querySelector('.h2x-in');if(inn){inn.style.zoom='';var hd0=document.querySelector('.l-header'),hh0=hd0?hd0.offsetHeight:72,need=vp.clientHeight-hh0-64,H00=hsw.offsetHeight;
+    var inn=hsw.querySelector('.h2x-in');if(inn){inn.style.zoom='';var hd0=document.querySelector('.l-header'),hh0=hd0?hd0.offsetHeight:72,need=vp.clientHeight-hh0,H00=hsw.offsetHeight;
       if(H00>need){var ih=inn.offsetHeight,z=Math.max(.68,(need-(H00-ih))/ih);inn.style.zoom=z.toFixed(3);}}
+    /* el fijado se calcula con el hero compacto (sin el espacio de la flecha), que es como queda al scrollear */
+    if(h2x)h2x.style.setProperty('padding-bottom','0px','important');
     var vh=vp.clientHeight,H=hsw.offsetHeight,M=hm.offsetHeight;
     /* el borde inferior del hero queda donde empieza el bloque blanco, que ocupa el resto de la pantalla */
     hm.style.minHeight='';M=hm.offsetHeight;
@@ -1792,12 +1894,17 @@ html.phone .device.mobile .viewport{border-radius:0}
     /* fijo: el gráfico queda justo debajo del header (el título, la bajada y el CTA se van), y el bloque de métricas
        toma el resto de la pantalla con las cards centradas. Si no entra, el gráfico sube lo necesario */
     T=Math.min(hh+16-hcOff,(vh-M)-H);duo.style.top=T+'px';hhT=hh;
+    /* desktop sin cards: menos blanco alrededor de los números; el alto que sobra se reparte 45% al violeta (arriba del gráfico) y 55% al blanco */
+    if(dev.classList.contains('desktop')&&hm.classList.contains('nc')){var Lft=vh-(T+H)-M;if(Lft>0){T+=Math.round(Lft*.45);duo.style.top=T+'px';}}
     /* desktop: las 3 métricas ya se ven de entrada, así que no hace falta fijar; mobile: fijo mientras entran las cards */
-    var dk=dev.classList.contains('desktop');hm.style.minHeight=dk?'':Math.max(M,vh-(T+H))+'px';
-    txt.forEach(function(el){var er=el.getBoundingClientRect(),hr2=hsw.getBoundingClientRect(),kk=(hr2.height/H)||1;el._pt=T+(er.top-hr2.top)/kk;});tr.style.height=(duo.offsetHeight+(dk?0:Math.round(vh*EXTRA)))+'px';upd();
+    var dk=(dev.classList.contains('desktop')&&!hm.classList.contains('nc'))||ORD==='b';hm.style.minHeight=dk?'':Math.max(M,vh-(T+H))+'px';
+    /* gráfico centrado en el violeta que queda a la vista (entre el header y el borde del hero) cuando se va el texto */
+    if(hc){hc.style.transform='';var hr3=hsw.getBoundingClientRect(),kk3=(hr3.height/H)||1,hb=hc.getBoundingClientRect(),hTop=(hb.top-hr3.top)/kk3,hH=hb.height/kk3,zz=parseFloat((hsw.querySelector('.h2x-in')||{}).style&&hsw.querySelector('.h2x-in').style.zoom)||1;
+      var visTop=hh,visBot=T+H;HCD=dk?0:((visTop+((visBot-visTop)-hH)/2)-(T+hTop))/zz;}
+    txt.forEach(function(el){var er=el.getBoundingClientRect(),hr2=hsw.getBoundingClientRect(),kk=(hr2.height/H)||1;el._pt=T+(er.top-hr2.top)/kk;});XPX=dk?0:Math.round(vh*(hm.classList.contains('nc')?1.6:EXTRA));tr.style.height=(duo.offsetHeight+XPX)+'px';upd();
   }
   /* al abrir la página, las cifras visibles cuentan desde 0 (desktop: las 3; mobile: la primera, que asoma de entrada) */
-  var counted=false,cIv=null;function countOnce(){if(counted)return;counted=true;var t0=Date.now()+600;var cs=[].slice.call(box.querySelectorAll(dev.classList.contains('desktop')?'.cnt':'.sp-b > :first-child .cnt'));
+  var counted=false,cIv=null;function countOnce(){if(counted)return;counted=true;var t0=Date.now()+150;var cs=[].slice.call(box.querySelectorAll(dev.classList.contains('desktop')||ORD==='b'?'.cnt':'.sp-b > :first-child .cnt'));
     cs.forEach(function(c){c.textContent=(c.dataset.pre||'')+fmt(0,+c.dataset.dec)+(c.dataset.suf||'');});
     clearInterval(cIv);var iv=cIv=setInterval(function(){var k=Math.max(0,Math.min(1,(Date.now()-t0)/1600)),e=1-Math.pow(1-k,3);cs.forEach(function(c){c.textContent=(c.dataset.pre||'')+fmt(parseFloat(c.dataset.to)*e,+c.dataset.dec)+(c.dataset.suf||'');});if(k>=1)clearInterval(iv);},30);}
   function upd(){
@@ -1805,13 +1912,21 @@ html.phone .device.mobile .viewport{border-radius:0}
     var start=tr.offsetTop-T,run=tr.offsetHeight-duo.offsetHeight,y=vp.scrollTop-start;
     if(vp.scrollTop>8)finalState();
     /* el título, la bajada y el CTA se desvanecen antes de que el hero quede fijo: arriba solo queda el gráfico */
-    var fo=cl((start-vp.scrollTop)/Math.max(1,Math.min(140,start)));txt.forEach(function(el){el.style.opacity=fo.toFixed(3);});
+    var fo=cl((start-vp.scrollTop)/Math.max(1,Math.min(140,start)));var hcE=hsw.querySelector('.hc');if(hcE)hcE.style.transform=HCD?'translateY('+(HCD*(1-fo)).toFixed(1)+'px)':'';txt.forEach(function(el){el.style.opacity=fo.toFixed(3);});
     var p=reduce?1:cl(y/Math.max(1,run));
     /* desktop: las 3 métricas se ven de entrada (las cifras cuentan una vez al cargar); mobile: entran con el scroll */
-    if(dev.classList.contains('desktop')){its.forEach(function(e){e.style.setProperty('--io',1);e.style.setProperty('--iy','0px');});countOnce();return;}
-    its.forEach(function(e,i){var s=i===0?-1:.04+(i-1)*.3,k=ease(cl((p-s)/.2));
+    var sc=vp.scrollTop;cue.style.opacity=(1-cl(sc/70)).toFixed(3);cue.style.pointerEvents=sc>40?'none':'';
+    /* al irse la flecha, el hero se compacta a su tamaño sin flecha */
+    var hx=hsw.querySelector('.h2x');if(hx){hx.style.setProperty('padding-bottom',(PBX*(1-ease(cl(sc/90)))).toFixed(1)+'px','important');tr.style.height=(duo.offsetHeight+XPX)+'px';}
+    if(ORD==='b'){/* métricas después de Cómo funciona: entran (y cuentan) al aparecer en pantalla */
+      var Rv=vp.getBoundingClientRect(),kz=Rv.height/vp.clientHeight,ht2=(hm.getBoundingClientRect().top-Rv.top)/kz,vh2=vp.clientHeight;
+      if(ht2<vh2*.85)countOnce();
+      its.forEach(function(e,i){var k=ease(cl((vh2-ht2)/(vh2*.4)-i*.15));e.style.setProperty('--io',k.toFixed(3));e.style.setProperty('--iy',((1-k)*24).toFixed(1)+'px');});return;}
+    if(sc>8)countOnce();
+    if(dev.classList.contains('desktop')){its.forEach(function(e,i){var k=ease(cl((sc-10-i*35)/150));e.style.setProperty('--io',k.toFixed(3));e.style.setProperty('--iy',((1-k)*24).toFixed(1)+'px');});return;}
+    its.forEach(function(e,i){var s=i===0?-1:.04+(i-1)*.3,k=i===0?ease(cl((sc-10)/150)):ease(cl((p-s)/.2));
       e.style.setProperty('--io',k.toFixed(3));e.style.setProperty('--iy',((1-k)*24).toFixed(1)+'px');
-      if(i===0){countOnce();return;}
+      if(i===0)return;
       e.querySelectorAll('.cnt').forEach(function(c){var kc=ease(cl((p-s)/.3));c.textContent=(c.dataset.pre||'')+fmt(parseFloat(c.dataset.to)*kc,+c.dataset.dec)+(c.dataset.suf||'');});});
   }
   /* si la animación automática del hero se dispara con la página scrolleada, mantiene el estado final */
@@ -1834,7 +1949,7 @@ html.phone .device.mobile .viewport{border-radius:0}
   /* al aparecer, la sección sube y comprime el blanco que queda debajo de las métricas (deja 24 px) */
   var base=0,gap=0;
   function measure(){tr.style.marginTop='';var ht=document.getElementById('herotrack'),hm=ht&&ht.querySelector('.hm'),cs=hm?hm.querySelectorAll('.sp-b > *'):[];
-    base=tr.offsetTop;if(!hm||!cs.length||!hm.offsetParent){gap=0;return;}var last=cs[cs.length-1];
+    base=tr.offsetTop;if(!hm||!cs.length||!hm.offsetParent||!ht.contains(hm)||tr.previousElementSibling!==ht&&!(tr.previousElementSibling&&tr.previousElementSibling.id==='sptrack'&&tr.previousElementSibling.previousElementSibling===ht)){gap=0;return;}var last=cs[cs.length-1];
     var cardBottom=ht.offsetTop+ht.offsetHeight-hm.offsetHeight+last.offsetTop+last.offsetHeight;gap=Math.max(0,base-cardBottom-24);}
   /* el hueco se cierra de forma lineal desde que la sección entra por abajo hasta que su borde superior llega a donde se fija */
   function lift(){if(!gap){tr.style.marginTop='';return;}var vh=vp.clientHeight,top=parseFloat(sec.style.top)||0,s0=base-vh,s1=base-gap-top,p=Math.max(0,Math.min(1,(vp.scrollTop-s0)/Math.max(1,s1-s0)));tr.style.marginTop=(-gap*p).toFixed(1)+'px';}
@@ -1878,11 +1993,13 @@ html.phone .device.mobile .viewport{border-radius:0}
       else{if(box.scrollLeft>=half)box.scrollLeft-=half;pos=box.scrollLeft;}
       }
     setInterval(step,16);})();
-  pin(rv&&rv.closest('section'),.45,function(p,s){var its=[].slice.call(s.querySelectorAll('.l-wrap > .eyebrow, .l-wrap > .h2, .l-wrap > .lead, .reviews'));its.forEach(function(e){e.classList.add('pn-it')});
-    /* entra rápido: se completa cuando la sección llega a la mitad de la pantalla, sin esperar a que se fije */
-    var R=vp.getBoundingClientRect(),k=R.height/vp.clientHeight,top=(s.getBoundingClientRect().top-R.top)/k,q=cl((vp.clientHeight-top)/(vp.clientHeight*.5));stag(its,q,0,.35);});
+  /* (reseñas y preguntas frecuentes van en un mismo bloque: ver pin de #faq) */
   /* Preguntas frecuentes: queda fija brevemente; su contenido aparece completo, sin animarse */
-  pin(document.getElementById('faq'),.45,function(){},true);pins[pins.length-1].fill=true; /* se traba con el encabezado de la sección arriba; después sigue */
+  /* Reseñas + preguntas frecuentes: un solo bloque, se traba con su título arriba; las reseñas entran con fade y después sigue a las preguntas */
+  pin(document.getElementById('faq'),.6,function(p,s){var its=[].slice.call(s.querySelectorAll(':scope > .l-wrap:first-child > .h2, .reviews'));its.forEach(function(e){e.classList.add('pn-it')});
+    /* primero se ven las reseñas; con el scroll (bloque fijo) suben y aparecen las preguntas */
+    var fg=s.querySelector('.faq-grid');if(fg){var kf=ease(cl((p-.4)/.45));fg.style.opacity=kf.toFixed(3);fg.style.transform='translateY('+((1-kf)*90).toFixed(1)+'px)';}
+    var R=vp.getBoundingClientRect(),k=R.height/vp.clientHeight,top=(s.getBoundingClientRect().top-R.top)/k,q=cl((vp.clientHeight-top)/(vp.clientHeight*.5));stag(its,q,0,.35);},true);pins[pins.length-1].fill=true; /* se traba con el encabezado de la sección arriba; después sigue */
   /* Cierre: la card aparece completa (sin animar su contenido) y crece apenas con el scroll */
   /* cierre + footer juntos: se fijan con el cierre arriba (debajo del header) y el footer asomando abajo; después se sueltan */
   var cl2=document.querySelector('.closer'),ft=document.querySelector('.l-footer');
@@ -1905,4 +2022,15 @@ html.phone .device.mobile .viewport{border-radius:0}
   document.addEventListener('toggle',function(){setTimeout(setup,30)},true);
   setup();setTimeout(setup,500);if(document.fonts)document.fonts.ready.then(setup);
 })();
+</script>
+
+<script>
+/* Toggle de orden: métricas antes o después de "Cómo funciona" */
+document.addEventListener('click',function(e){var btn=e.target.closest('[data-ord]');if(!btn)return;
+  document.querySelectorAll('[data-ord]').forEach(function(x){x.setAttribute('aria-pressed',x===btn)});if(window.hmOrder)hmOrder(btn.dataset.ord);});
+</script>
+
+<script>
+document.addEventListener('click',function(e){var b=e.target.closest('[data-met]');if(!b)return;
+  document.querySelectorAll('[data-met]').forEach(function(x){x.setAttribute('aria-pressed',x===b)});if(window.hmStyle)hmStyle(b.dataset.met);});
 </script>
