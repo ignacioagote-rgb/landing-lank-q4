@@ -1871,6 +1871,7 @@ html.phone .device.mobile .viewport{border-radius:0}
   setTimeout(function(){vp.addEventListener('scroll',function(){post()},{passive:true});window.addEventListener('resize',function(){setTimeout(post,0)});},0); /* después del listener principal */
   window.hmStyle=function(s){hm.classList.toggle('nc',s==='nc');counted=false;its.forEach(function(e){e.style.removeProperty('--sc');e.style.setProperty('--io',0);});
     setTimeout(function(){window.dispatchEvent(new Event('resize'));vp.dispatchEvent(new Event('scroll'));post();},60);};
+  if(document.documentElement.classList.contains('standalone'))window.hmStyle('nc');
   window.hmOrder=function(o){ORD=o;var b2=document.querySelector('.b2-track')||document.getElementById('how');
     if(o==='b'){if(b2&&b2.parentNode)b2.parentNode.insertBefore(hm,b2.nextSibling);hm.classList.add('out');}
     else{duo.appendChild(hm);hm.classList.remove('out');}
