@@ -866,6 +866,37 @@ html.phone .device.mobile .viewport{border-radius:0}
   background:rgba(255,255,255,var(--cb,0))!important;box-shadow:0 8px 24px rgba(20,20,70,calc(.08*var(--cb,0)))!important}
 .mobile .hm.nc .sp-b > *,.mobile .hm.nc .sp-b > * + *{padding:18px 18px!important}
 
+/* Métricas "Frase": frase principal + chips */
+.hm-fr{display:none}
+.hm.fr .sp-b{display:none!important}
+.hm.fr .hm-fr{display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:28px}
+.fr-h{margin:0;font-family:var(--f-brand);font-weight:700;font-size:40px;line-height:1.2;letter-spacing:-.02em;color:var(--ink);will-change:transform,opacity}
+.fr-n{color:var(--violeta);font-size:80px;line-height:1;display:flex;align-items:center;gap:18px;margin-bottom:12px;letter-spacing:-.03em}
+.fr-t{display:block}
+.odo{display:inline-flex;height:1em;line-height:1em;overflow:hidden;font-variant-numeric:tabular-nums}
+.odo-d{display:inline-block;height:1em;overflow:hidden;width:.62em;text-align:center}
+.odo-s{display:inline-block;width:.26em;text-align:center}
+.odo-c{display:block;line-height:1em}
+.odo-c b{display:block;height:1em;font-weight:inherit}
+.odo.anim .odo-c{transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+.fr-live{position:relative;flex:none;width:12px;height:12px;border-radius:50%;background:#22A06B}
+.fr-live::after{content:"";position:absolute;inset:0;border-radius:50%;background:#22A06B;animation:frLive 1.8s ease-out infinite}
+@keyframes frLive{0%{transform:scale(1);opacity:.55}100%{transform:scale(2.8);opacity:0}}
+@media (prefers-reduced-motion: reduce){.fr-live::after{animation:none}.odo.anim .odo-c{transition:none}}
+.fr-chips{display:flex;flex-wrap:wrap;justify-content:flex-start;gap:10px}
+.fr-c{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border:1px solid var(--line);border-radius:999px;background:#fff;font-size:15px;font-weight:500;color:var(--ink-2);white-space:nowrap}
+.fr-c svg{width:18px;height:18px;flex:none;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.fr-c svg.y{fill:#FFA900;stroke:#FFA900}.fr-c svg.v{stroke:var(--violeta)}.fr-c svg.g{stroke:#22A06B}
+.mobile .hm.fr .hm-fr{gap:20px}
+.mobile .fr-h{font-size:24px}
+.mobile .fr-h br{display:none}
+.mobile .fr-n{font-size:52px;gap:12px;margin-bottom:8px}
+.mobile .fr-live{width:10px;height:10px}
+.mobile .fr-chips{gap:8px}
+.mobile .fr-c{font-size:13px;padding:7px 12px;gap:6px}
+.mobile .fr-c svg{width:15px;height:15px}
+.hero-track.pin .hm.fr,.desktop .hero-track.pin .hm.fr,.mobile .hero-track.pin .hm.fr{justify-content:center!important;padding-top:24px!important;padding-bottom:24px!important}
+
 /* Métricas como bloque propio (orden: Cómo funciona → Métricas) */
 .hm.out{display:block!important;background:#fff;padding:72px 0 80px!important}
 .mobile .hm.out{padding:48px 0 56px!important}
@@ -1129,7 +1160,7 @@ html .mobile #how[data-role="miembro"] .b2-panel{border-radius:12px 0 12px 12px}
       <button type="button" id="b-desk" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>Desktop</button>
       <button type="button" id="b-mob" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>Mobile</button>
     </div>
-    <div class="seg" role="group" aria-label="Estilo de métricas"><button type="button" data-met="cards" aria-pressed="true">Métricas: cards</button><button type="button" data-met="nc" aria-pressed="false">Sin cards</button></div>
+    <div class="seg" role="group" aria-label="Estilo de métricas"><button type="button" data-met="cards" aria-pressed="true">Métricas: cards</button><button type="button" data-met="nc" aria-pressed="false">Sin cards</button><button type="button" data-met="fr" aria-pressed="false">Frase</button></div>
     <div class="seg" role="group" aria-label="Orden de bloques"><button type="button" data-ord="a" aria-pressed="true">Orden: Métricas → Cómo funciona</button><button type="button" data-ord="b" aria-pressed="false">Cómo funciona → Métricas</button></div>
     <div class="seg" role="group" aria-label="Variante de copy"><button type="button" data-lang="neutro" aria-pressed="true">Copy: Neutro</button><button type="button" data-lang="rio" aria-pressed="false">Rioplatense</button></div>
     <button type="button" class="ghost" id="restart">Volver al inicio</button>
@@ -1852,6 +1883,15 @@ html .mobile #how[data-role="miembro"] .b2-panel{border-radius:12px 0 12px 12px}
   var hm=document.createElement('div');hm.className='hm sp-wrap';hm.setAttribute('data-sp','B');
   var lw=document.createElement('div');lw.className='l-wrap';hm.appendChild(lw);var box=document.createElement('div');box.className='sp sp-b';lw.appendChild(box);
   [].slice.call(sp.querySelectorAll('.sp-b .spb-main,.sp-b .spb-row')).forEach(function(e){var c=e.cloneNode(true);c.classList.remove('sp-it');c.removeAttribute('style');box.appendChild(c);});
+  /* Métricas "Frase": una frase principal con el +1,6 M y debajo, chips con las métricas secundarias */
+  var fr=document.createElement('div');fr.className='hm-fr';
+  fr.innerHTML='<p class="fr-h"><span class="fr-n"><span class="odo" role="img" aria-label="1.638.214"></span><i class="fr-live" aria-hidden="true"></i></span><span class="fr-t">personas en Latam <br>ya comparten sus suscripciones con Lank</span></p>'+
+    '<div class="fr-chips">'+
+    '<span class="fr-c"><svg viewBox="0 0 24 24" aria-hidden="true" class="y"><path d="M12 3l2.7 5.5 6 .9-4.4 4.2 1 6-5.3-2.8-5.3 2.8 1-6L3.3 9.4l6-.9z"/></svg>4,8 estrellas en Google</span>'+
+    '<span class="fr-c"><svg viewBox="0 0 24 24" aria-hidden="true" class="v"><path d="M4 5h16v11H9l-5 4z"/></svg>+6.500 reseñas</span>'+
+    '<span class="fr-c"><svg viewBox="0 0 24 24" aria-hidden="true" class="g"><ellipse cx="9" cy="7" rx="6" ry="3"/><path d="M3 7v5c0 1.7 2.7 3 6 3s6-1.3 6-3V7"/><path d="M9 15v2c0 1.7 2.7 3 6 3s6-1.3 6-3v-5c0-1.7-2.7-3-6-3"/></svg>+3 M USD ahorrados</span>'+
+    '</div>';
+  lw.appendChild(fr);
   duo.appendChild(hm);
   /* al inicio no se ven las métricas: en su lugar, un círculo con una flecha que invita a scrollear */
   var cue=document.createElement('button');cue.type='button';cue.className='hm-cue';cue.setAttribute('aria-label','Ver más');cue.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>';hsw.appendChild(cue); /* va dentro del hero violeta, abajo al centro */
@@ -1865,7 +1905,26 @@ html .mobile #how[data-role="miembro"] .b2-panel{border-radius:12px 0 12px 12px}
   var ORD='a';
   /* Métricas "sin cards": cada número entra ~2,5x más grande y se achica hasta su tamaño final mientras cuenta; de a uno, con el scroll */
   function nc(){return hm.classList.contains('nc')}
-  function post(){if(!on()||!nc())return;counted=true;clearInterval(cIv);
+  function xs(){return hm.classList.contains('nc')||hm.classList.contains('fr')}
+  /* "Frase": la frase entra con un fundido mientras el +1,6 M cuenta; después entran los chips de a uno */
+  /* contador en vivo: cada dígito es una columna 0-9 que rueda hasta su valor */
+  var ODO_BASE=1638214,odoN=ODO_BASE,odoLive=null,odoShown=-1;
+  function odoFmt(n){return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.')}
+  function odoSet(n,anim){var el=fr.querySelector('.odo');if(!el)return;var s=odoFmt(n);if(s===el._s&&!!anim===el._a)return;el._s=s;el._a=!!anim;el.setAttribute('aria-label',s);el.classList.toggle('anim',!!anim);
+    var ch=el.children;while(ch.length>s.length)el.removeChild(el.firstChild);
+    while(ch.length<s.length){var c=document.createElement('span');c.className='odo-d';c.innerHTML='<span class="odo-c"><b>0</b><b>1</b><b>2</b><b>3</b><b>4</b><b>5</b><b>6</b><b>7</b><b>8</b><b>9</b></span>';el.insertBefore(c,el.firstChild);}
+    for(var i=0;i<s.length;i++){var d=ch[i],x=s[i];if(x==='.'){d.className='odo-s';d.textContent='.';continue;}
+      if(d.className!=='odo-d'){d.className='odo-d';d.innerHTML='<span class="odo-c"><b>0</b><b>1</b><b>2</b><b>3</b><b>4</b><b>5</b><b>6</b><b>7</b><b>8</b><b>9</b></span>';}
+      d.firstChild.style.transform='translateY('+(-(+x))+'em)';}}
+  function odoStart(){if(odoLive)return;odoLive=setInterval(function(){if(!fr.offsetParent||!hm.classList.contains('fr'))return;odoN+=1+Math.floor(Math.random()*3);odoSet(odoN,true);},2400);}
+  function odoStop(){clearInterval(odoLive);odoLive=null;}
+  function postFr(){counted=true;clearInterval(cIv);var vh=vp.clientHeight,sc=vp.scrollTop,Rv=vp.getBoundingClientRect(),kz=Rv.height/vh,P;
+    if(ORD==='b'){var top=(hm.getBoundingClientRect().top-Rv.top)/kz;P=cl((vh*.9-top)/(vh*.8));}
+    else{var start=tr.offsetTop-T,run=Math.max(1,tr.offsetHeight-duo.offsetHeight);P=cl((sc-start+vh*.15)/(run+vh*.15));}
+    var h=fr.querySelector('.fr-h'),k=ease(cl((P-.02)/.35));h.style.opacity=k.toFixed(3);h.style.transform='translateY('+((1-k)*24).toFixed(1)+'px)';
+    var kn=cl((P-.04)/.42);if(kn>=1){odoSet(odoN,true);odoStart();}else{odoStop();odoSet(odoN*ease(kn),false);}
+    [].slice.call(fr.querySelectorAll('.fr-c')).forEach(function(e,i){var q=ease(cl((P-.42-i*.12)/.2));e.style.opacity=q.toFixed(3);e.style.transform='translateY('+((1-q)*14).toFixed(1)+'px)';});}
+  function post(){if(!on())return;if(hm.classList.contains('fr')){postFr();return;}if(!nc())return;counted=true;clearInterval(cIv);
     var vh=vp.clientHeight,sc=vp.scrollTop,Rv=vp.getBoundingClientRect(),kz=Rv.height/vh,mob=dev.classList.contains('mobile');
     its.forEach(function(e,i){var k;
       if(ORD==='b'){var top=(hm.getBoundingClientRect().top-Rv.top)/kz;k=cl((vh*.9-top)/(vh*.55)-i*.9);}
@@ -1874,9 +1933,9 @@ html .mobile #how[data-role="miembro"] .b2-panel{border-radius:12px 0 12px 12px}
       var ke=ease(k);e.style.setProperty('--io',Math.min(1,ke*1.6).toFixed(3));e.style.setProperty('--iy','0px');e.style.setProperty('--sc',(1+1.5*(1-ke)).toFixed(3));
       e.querySelectorAll('.cnt').forEach(function(c){c.textContent=(c.dataset.pre||'')+fmt(parseFloat(c.dataset.to)*ke,+c.dataset.dec)+(c.dataset.suf||'');});});}
   setTimeout(function(){vp.addEventListener('scroll',function(){post()},{passive:true});window.addEventListener('resize',function(){setTimeout(post,0)});},0); /* después del listener principal */
-  window.hmStyle=function(s){hm.classList.toggle('nc',s==='nc');counted=false;its.forEach(function(e){e.style.removeProperty('--sc');e.style.setProperty('--io',0);});
+  window.hmStyle=function(s){hm.classList.toggle('nc',s==='nc');hm.classList.toggle('fr',s==='fr');counted=false;its.forEach(function(e){e.style.removeProperty('--sc');e.style.setProperty('--io',0);});
     setTimeout(function(){window.dispatchEvent(new Event('resize'));vp.dispatchEvent(new Event('scroll'));post();},60);};
-  if(document.documentElement.classList.contains('standalone'))window.hmStyle('nc');
+  if(document.documentElement.classList.contains('standalone'))window.hmStyle('fr');
   window.hmOrder=function(o){ORD=o;var b2=document.querySelector('.b2-track')||document.getElementById('how');
     if(o==='b'){if(b2&&b2.parentNode)b2.parentNode.insertBefore(hm,b2.nextSibling);hm.classList.add('out');}
     else{duo.appendChild(hm);hm.classList.remove('out');}
@@ -1901,13 +1960,13 @@ html .mobile #how[data-role="miembro"] .b2-panel{border-radius:12px 0 12px 12px}
        toma el resto de la pantalla con las cards centradas. Si no entra, el gráfico sube lo necesario */
     T=Math.min(hh+16-hcOff,(vh-M)-H);duo.style.top=T+'px';hhT=hh;
     /* desktop sin cards: menos blanco alrededor de los números; el alto que sobra se reparte 45% al violeta (arriba del gráfico) y 55% al blanco */
-    if(dev.classList.contains('desktop')&&hm.classList.contains('nc')){var Lft=vh-(T+H)-M;if(Lft>0){T+=Math.round(Lft*.45);duo.style.top=T+'px';}}
+    if(dev.classList.contains('desktop')&&xs()){var Lft=vh-(T+H)-M;if(Lft>0){T+=Math.round(Lft*.45);duo.style.top=T+'px';}}
     /* desktop: las 3 métricas ya se ven de entrada, así que no hace falta fijar; mobile: fijo mientras entran las cards */
-    var dk=(dev.classList.contains('desktop')&&!hm.classList.contains('nc'))||ORD==='b';hm.style.minHeight=dk?'':Math.max(M,vh-(T+H))+'px';
+    var dk=(dev.classList.contains('desktop')&&!xs())||ORD==='b';hm.style.minHeight=dk?'':Math.max(M,vh-(T+H))+'px';
     /* gráfico centrado en el violeta que queda a la vista (entre el header y el borde del hero) cuando se va el texto */
     if(hc){hc.style.transform='';var hr3=hsw.getBoundingClientRect(),kk3=(hr3.height/H)||1,hb=hc.getBoundingClientRect(),hTop=(hb.top-hr3.top)/kk3,hH=hb.height/kk3,zz=parseFloat((hsw.querySelector('.h2x-in')||{}).style&&hsw.querySelector('.h2x-in').style.zoom)||1;
       var visTop=hh,visBot=T+H;HCD=dk?0:((visTop+((visBot-visTop)-hH)/2)-(T+hTop))/zz;}
-    txt.forEach(function(el){var er=el.getBoundingClientRect(),hr2=hsw.getBoundingClientRect(),kk=(hr2.height/H)||1;el._pt=T+(er.top-hr2.top)/kk;});XPX=dk?0:Math.round(vh*(hm.classList.contains('nc')?1.6:EXTRA));tr.style.height=(duo.offsetHeight+XPX)+'px';upd();
+    txt.forEach(function(el){var er=el.getBoundingClientRect(),hr2=hsw.getBoundingClientRect(),kk=(hr2.height/H)||1;el._pt=T+(er.top-hr2.top)/kk;});XPX=dk?0:Math.round(vh*(xs()?1.6:EXTRA));tr.style.height=(duo.offsetHeight+XPX)+'px';upd();
   }
   /* al abrir la página, las cifras visibles cuentan desde 0 (desktop: las 3; mobile: la primera, que asoma de entrada) */
   var counted=false,cIv=null;function countOnce(){if(counted)return;counted=true;var t0=Date.now()+150;var cs=[].slice.call(box.querySelectorAll(dev.classList.contains('desktop')||ORD==='b'?'.cnt':'.sp-b > :first-child .cnt'));
