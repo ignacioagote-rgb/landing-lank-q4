@@ -1945,8 +1945,11 @@ html .mobile #how[data-role="miembro"] .b2-panel{border-radius:12px 0 12px 12px}
     if(!act){tr.style.height='';duo.style.top='';txt.forEach(function(el){el.style.opacity=''});return;}
     var h2x=hsw.querySelector('.h2x');PBX=dev.classList.contains('mobile')?84:96;if(h2x)h2x.style.setProperty('padding-bottom',PBX+'px','important');
     /* responsive en alto: si el hero no entra entero en la pantalla (con la primera métrica asomando), su contenido se achica proporcionalmente */
-    var inn=hsw.querySelector('.h2x-in');if(inn){inn.style.zoom='';var hd0=document.querySelector('.l-header'),hh0=hd0?hd0.offsetHeight:72,need=vp.clientHeight-hh0,H00=hsw.offsetHeight;
-      if(H00>need){var ih=inn.offsetHeight,z=Math.max(.68,(need-(H00-ih))/ih);inn.style.zoom=z.toFixed(3);}}
+    var inn=hsw.querySelector('.h2x-in');if(inn){inn.style.zoom='';inn.style.marginLeft='';var hd0=document.querySelector('.l-header'),hh0=hd0?hd0.offsetHeight:72,need=vp.clientHeight-hh0,H00=hsw.offsetHeight;
+      if(H00>need){var ih=inn.offsetHeight,z=Math.max(.68,(need-(H00-ih))/ih);
+        /* al achicar con zoom, el contenedor centrado se correría a la derecha: se fija su borde izquierdo al margen de la página */
+        var kq=(hsw.getBoundingClientRect().width/hsw.offsetWidth)||1,L0=(inn.getBoundingClientRect().left-hsw.getBoundingClientRect().left)/kq,Pd=parseFloat(getComputedStyle(inn).paddingLeft)||0;
+        inn.style.zoom=z.toFixed(3);inn.style.marginLeft=(L0/z+Pd*(1-z)/z).toFixed(1)+'px';}}
     /* el fijado se calcula con el hero compacto (sin el espacio de la flecha), que es como queda al scrollear */
     if(h2x)h2x.style.setProperty('padding-bottom','0px','important');
     var vh=vp.clientHeight,H=hsw.offsetHeight,M=hm.offsetHeight;
