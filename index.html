@@ -1028,6 +1028,11 @@ html.phone .device.mobile .viewport{border-radius:0}
 .b2-panel{border:0}
 .b2-ill{background:transparent;padding:0;border-radius:16px}
 .b2-card{border:1px solid var(--line);border-radius:16px;padding:24px;font-family:var(--f-brand);justify-content:flex-start}
+/* radios: card interna 8 px, card de afuera 12 px */
+html #how .b2-card,html #how .b2-ill{border-radius:8px}
+html #how[data-role="dueno"] .b2-panel,html .mobile #how[data-role="dueno"] .b2-panel{border-radius:0 12px 12px 12px}
+html #how[data-role="miembro"] .b2-panel{border-radius:12px}
+html .mobile #how[data-role="miembro"] .b2-panel{border-radius:12px 0 12px 12px}
 .b2-head{gap:12px;padding-bottom:16px;margin-bottom:0;border-bottom:1px solid var(--line)}
 .b2-slots{margin-top:auto!important;margin-bottom:auto!important;padding:20px 0}
 .b2-ico{position:relative;overflow:hidden;width:44px;height:44px;border-radius:12px;background:var(--bg-soft);flex:none}
@@ -2020,7 +2025,12 @@ html.phone .device.mobile .viewport{border-radius:0}
     o.fn(cl((vp.scrollTop-start)/Math.max(1,run)),o.sec);});}
   vp.addEventListener('scroll',upd,{passive:true});window.addEventListener('resize',setup);
   document.addEventListener('click',function(e){if(e.target.closest('#b-mob,#b-desk,#restart,[data-plopt],[data-lang]'))setTimeout(setup,150);});
-  document.addEventListener('toggle',function(){setTimeout(setup,30)},true);
+  /* abrir/cerrar una pregunta cambia el alto del bloque: la pista se reajusta antes de pintar (ResizeObserver), así no salta */
+  if(window.ResizeObserver){var roH=new WeakMap(),ro=new ResizeObserver(function(es){var ch=false;es.forEach(function(e){var h=e.target.offsetHeight;if(roH.get(e.target)!==h){if(roH.has(e.target))ch=true;roH.set(e.target,h);}});if(ch)setup();});pins.forEach(function(o){ro.observe(o.sec)});}
+  else document.addEventListener('toggle',function(){setup()},true);
+  /* además, el click en una pregunta la abre/cierra y reajusta la pista en el mismo paso (sin cuadro intermedio) */
+  document.addEventListener('click',function(e){var sm=e.target.closest('summary');if(!sm)return;var d=sm.parentElement;if(!d||!pins.some(function(o){return o.sec.contains(d)}))return;
+    e.preventDefault();d.open=!d.open;setup();},true);
   setup();setTimeout(setup,500);if(document.fonts)document.fonts.ready.then(setup);
 })();
 </script>
