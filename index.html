@@ -2099,7 +2099,9 @@ html .mobile #how[data-role="miembro"] .b2-panel{border-radius:12px 0 12px 12px}
     base=tr.offsetTop;if(!hm||!cs.length||!hm.offsetParent||!ht.contains(hm)||tr.previousElementSibling!==ht&&!(tr.previousElementSibling&&tr.previousElementSibling.id==='sptrack'&&tr.previousElementSibling.previousElementSibling===ht)){gap=0;return;}var last=cs[cs.length-1];
     var cardBottom=ht.offsetTop+ht.offsetHeight-hm.offsetHeight+last.offsetTop+last.offsetHeight;gap=Math.max(0,base-cardBottom-24);}
   /* el hueco se cierra de forma lineal desde que la sección entra por abajo hasta que su borde superior llega a donde se fija */
-  function lift(){if(!gap){tr.style.marginTop='';return;}var vh=vp.clientHeight,top=parseFloat(sec.style.top)||0,s0=base-vh,s1=base-gap-top,p=Math.max(0,Math.min(1,(vp.scrollTop-s0)/Math.max(1,s1-s0)));tr.style.marginTop=(-gap*p).toFixed(1)+'px';}
+  /* 2026-11-24: se superpone sobre los números, pero más suave: cubre la mitad del hueco (antes todo), arranca apenas se sueltan los números,
+     acelera y frena con curva, y termina justo cuando la sección se fija (así su pausa no se acorta) */
+  function lift(){if(!gap){tr.style.marginTop='';return;}var vh=vp.clientHeight,top=parseFloat(sec.style.top)||0,G=gap*.5,N=base-vp.scrollTop,Na=vh+150,Nb=top+G,p=Math.max(0,Math.min(1,(Na-N)/Math.max(1,Na-Nb)));p=p*p*(3-2*p);tr.style.marginTop=(-G*p).toFixed(1)+'px';}
   vp.addEventListener('scroll',lift,{passive:true});
   /* cada vez que la sección entra en pantalla, los pasos arrancan desde el 1 */
   var seen=false;function watch(){var r=sec.getBoundingClientRect(),R=vp.getBoundingClientRect(),vis=r.top<R.bottom-40&&r.bottom>R.top+40;if(vis&&!seen&&window.b2Restart)b2Restart();seen=vis;}
