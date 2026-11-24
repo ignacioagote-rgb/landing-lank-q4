@@ -2000,7 +2000,7 @@ html .mobile #how[data-role="miembro"] .b2-panel{border-radius:12px 0 12px 12px}
       odoStop();var t0=Date.now();odoSet(0,false);frIv=setInterval(function(){var u=cl((Date.now()-t0)/1600);if(u>=1){clearInterval(frIv);odoSet(odoN,true);odoStart();}else odoSet(odoN*ease(u),false);},30);}
     else if(P<=.005&&frGo){frGo=false;clearInterval(frIv);odoStop();h.style.transition='none';h.style.opacity='0';h.style.transform='translateY(24px)';odoSet(0,false);}
     else if(!frGo){h.style.opacity='0';h.style.transform='translateY(24px)';}
-    [].slice.call(fr.querySelectorAll('.fr-c')).forEach(function(e,i){var q=ease(cl((P-.06-i*.1)/.2));e.style.opacity=q.toFixed(3);e.style.transform='translateY('+((1-q)*14).toFixed(1)+'px)';});}
+    [].slice.call(fr.querySelectorAll('.fr-c')).forEach(function(e,i){var q=ease(cl((P-.15-i*.22)/.36));e.style.opacity=q.toFixed(3);e.style.transform='translateY('+((1-q)*14).toFixed(1)+'px)';});}
   function post(){if(!on())return;if(hm.classList.contains('fr')){postFr();return;}if(!nc())return;counted=true;clearInterval(cIv);
     var vh=vp.clientHeight,sc=vp.scrollTop,Rv=vp.getBoundingClientRect(),kz=Rv.height/vh,mob=dev.classList.contains('mobile');
     its.forEach(function(e,i){var k;
@@ -2046,7 +2046,7 @@ html .mobile #how[data-role="miembro"] .b2-panel{border-radius:12px 0 12px 12px}
     /* gráfico centrado en el violeta que queda a la vista (entre el header y el borde del hero) cuando se va el texto */
     if(hc){hc.style.transform='';var hr3=hsw.getBoundingClientRect(),kk3=(hr3.height/H)||1,hb=hc.getBoundingClientRect(),hTop=(hb.top-hr3.top)/kk3,hH=hb.height/kk3,zz=parseFloat((hsw.querySelector('.h2x-in')||{}).style&&hsw.querySelector('.h2x-in').style.zoom)||1;
       var visTop=hh,visBot=T+H;HCD=dk?0:((visTop+((visBot-visTop)-hH)/2)-(T+hTop))/zz;}
-    txt.forEach(function(el){var er=el.getBoundingClientRect(),hr2=hsw.getBoundingClientRect(),kk=(hr2.height/H)||1;el._pt=T+(er.top-hr2.top)/kk;});XPX=dk?0:Math.round(vh*(xs()?1.6:EXTRA));/* hero a pantalla completa: al abrir, el hero ocupa todo el alto visible (debajo del header); el alto que sobra se reparte arriba y abajo y se recoge al scrollear */
+    txt.forEach(function(el){var er=el.getBoundingClientRect(),hr2=hsw.getBoundingClientRect(),kk=(hr2.height/H)||1;el._pt=T+(er.top-hr2.top)/kk;});XPX=dk?0:Math.round(vh*(xs()?.9:EXTRA));/* 2026-11-24: tramo más corto (antes 1,6 pantallas): apenas entran los 3 chips, se suelta *//* hero a pantalla completa: al abrir, el hero ocupa todo el alto visible (debajo del header); el alto que sobra se reparte arriba y abajo y se recoge al scrollear */
     var hdN=document.querySelector('.l-header'),needN=vp.clientHeight-(hdN?hdN.offsetHeight:72),PB0=dev.classList.contains('mobile')?84:96,exN=Math.max(0,needN-H-PB0);PBX=PB0+exN/2;PTX=exN/2;
     tr.style.height=(duo.offsetHeight+XPX)+'px';upd();
   }
