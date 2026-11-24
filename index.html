@@ -1989,12 +1989,18 @@ html .mobile #how[data-role="miembro"] .b2-panel{border-radius:12px 0 12px 12px}
       d.firstChild.style.transform='translateY('+(-(+x))+'em)';}}
   function odoStart(){if(odoLive)return;odoLive=setInterval(function(){if(!fr.offsetParent||!hm.classList.contains('fr'))return;odoN+=1+Math.floor(Math.random()*3);odoSet(odoN,true);},2400);}
   function odoStop(){clearInterval(odoLive);odoLive=null;}
+  var frGo=false,frIv=null;
   function postFr(){counted=true;clearInterval(cIv);var cwf=fr.querySelector('.fr-chips');if(cwf&&cwf._w!==cwf.clientWidth){cwf._w=cwf.clientWidth;frFit();}var vh=vp.clientHeight,sc=vp.scrollTop,Rv=vp.getBoundingClientRect(),kz=Rv.height/vh,P;
     if(ORD==='b'){var top=(hm.getBoundingClientRect().top-Rv.top)/kz;P=cl((vh*.9-top)/(vh*.8));}
     else{var start=tr.offsetTop-T,run=Math.max(1,tr.offsetHeight-duo.offsetHeight);P=cl((sc-start+vh*.15)/(run+vh*.15));}
-    var h=fr.querySelector('.fr-h'),k=ease(cl((P-.02)/.35));h.style.opacity=k.toFixed(3);h.style.transform='translateY('+((1-k)*24).toFixed(1)+'px)';
-    var kn=cl((P-.04)/.42);if(kn>=1){odoSet(odoN,true);odoStart();}else{odoStop();odoSet(odoN*ease(kn),false);}
-    [].slice.call(fr.querySelectorAll('.fr-c')).forEach(function(e,i){var q=ease(cl((P-.42-i*.12)/.2));e.style.opacity=q.toFixed(3);e.style.transform='translateY('+((1-q)*14).toFixed(1)+'px)';});}
+    /* 2026-11-24: el número aparece y cuenta solo con el tiempo apenas se empieza a scrollear (no depende del scroll);
+       lo único que sigue al scroll son los 3 chips, así se puede pasar rápido por la sección. Si se vuelve arriba de todo, se rearma. */
+    var h=fr.querySelector('.fr-h');
+    if(P>.005&&!frGo){frGo=true;clearInterval(frIv);h.style.transition='opacity .5s ease,transform .5s cubic-bezier(.2,.7,.2,1)';h.style.opacity='1';h.style.transform='translateY(0px)';
+      odoStop();var t0=Date.now();odoSet(0,false);frIv=setInterval(function(){var u=cl((Date.now()-t0)/1600);if(u>=1){clearInterval(frIv);odoSet(odoN,true);odoStart();}else odoSet(odoN*ease(u),false);},30);}
+    else if(P<=.005&&frGo){frGo=false;clearInterval(frIv);odoStop();h.style.transition='none';h.style.opacity='0';h.style.transform='translateY(24px)';odoSet(0,false);}
+    else if(!frGo){h.style.opacity='0';h.style.transform='translateY(24px)';}
+    [].slice.call(fr.querySelectorAll('.fr-c')).forEach(function(e,i){var q=ease(cl((P-.06-i*.1)/.2));e.style.opacity=q.toFixed(3);e.style.transform='translateY('+((1-q)*14).toFixed(1)+'px)';});}
   function post(){if(!on())return;if(hm.classList.contains('fr')){postFr();return;}if(!nc())return;counted=true;clearInterval(cIv);
     var vh=vp.clientHeight,sc=vp.scrollTop,Rv=vp.getBoundingClientRect(),kz=Rv.height/vh,mob=dev.classList.contains('mobile');
     its.forEach(function(e,i){var k;
